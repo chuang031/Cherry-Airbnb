@@ -2,7 +2,8 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+
+![db](db.png)
 
 ## API Documentation
 
@@ -294,7 +295,7 @@ Returns all the spots owned (created) by the current user.
 - Request
 
   - Method: GET
-  - URL: /api/spots/:ownerId
+  - URL: /api/spots/:userId
   - Body: none
 
 - Successful Response
@@ -666,7 +667,7 @@ Returns all the reviews written by the current user.
 - Request
 
   - Method: GET
-  - URL: /api/users/:userId/reviews
+  - URL: /api/reviews/:userId
   - Body: none
 
 - Successful Response
@@ -724,7 +725,7 @@ Returns all the reviews that belong to a spot specified by id.
 - Request
 
   - Method: GET
-  - URL: /api/spots/:spotId/reviews
+  - URL: /api/spot/:spotId/reviews
   - Body: none
 
 - Successful Response
@@ -869,7 +870,7 @@ Create and return a new image for a review specified by id.
 - Request
 
   - Method: POST
-  - URL: /api/reviews/:reviewId
+  - URL: /api/reviews/:reviewId/image
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1045,7 +1046,7 @@ Return all the bookings that the current user has made.
 - Request
 
   - Method: GET
-  - URL: /api/bookings
+  - URL: /api/users/:userId/bookings
   - Body: none
 
 - Successful Response
@@ -1412,7 +1413,7 @@ Delete an existing image for a Spot.
 - Request
 
   - Method: DELETE
-  - URL: /api/spots/:spotId/image
+  - URL: /api/spots/:spotId/image/imageId
   - Body: none
 
 - Successful Response
@@ -1452,7 +1453,7 @@ Delete an existing image for a Review.
 - Request
 
   - Method: DELETE
-  - URL: /api/reviews/:reviewId/image
+  - URL: /api/reviews/:reviewId/image/imageId
   - Body: none
 
 - Successful Response
