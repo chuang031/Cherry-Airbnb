@@ -5,7 +5,8 @@ const router = express.Router();
 // import the check function from express-validator and the handleValidationError function you created.
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
-
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { User } = require('../../db/models');
 
 // Make a middleware called validateSignup that will check these keys of username, email, and password and validate them
 const validateSignup = [
@@ -21,6 +22,20 @@ const validateSignup = [
       .not()
       .isEmail()
       .withMessage('Username cannot be an email.'),
+    check('firstName')
+      .exists({ checkFalsy: true })
+      .isLength({ min: 2 })
+      .withMessage('Please provide a first name with at least 2 characters.'),
+    check('firstName')
+      .isAlpha()
+      .withMessage('First name must be letters'),
+    check('lastName')
+      .exists({ checkFalsy: true })
+      .isLength({ min: 2 })
+      .withMessage('Please provide a last name with at least 2 characters.'),
+    check('lastName')
+      .isAlpha()
+      .withMessage('Last name must be letters'),
     check('password')
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
@@ -33,8 +48,8 @@ router.post(
     '/',
     validateSignup,
     async (req, res) => {
-      const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
+      const { email, password, username, firstName, lastName } = req.body;
+      const user = await User.signup({ email, username, firstName, lastName,password });
   
       await setTokenCookie(res, user);
   
