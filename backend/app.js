@@ -11,6 +11,7 @@ const isProduction = environment === 'production';
 
 const app = express();
 
+
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
@@ -43,10 +44,11 @@ if (!isProduction) {
 const routes = require('./routes');
 
 
-
 app.use(routes); // Connect all the routes
 
-
+app.get('/', async(req,res)=>{
+  res.json("successfully created.")
+})
 
 
 
