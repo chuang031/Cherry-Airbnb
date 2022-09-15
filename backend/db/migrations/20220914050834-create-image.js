@@ -10,7 +10,7 @@ module.exports = {
       },
       url: {
         allowNull: false,
-        type: Sequelize.BLOB
+        type: Sequelize.STRING(500)
       },
       preview: {
         allowNull: false,
@@ -19,20 +19,12 @@ module.exports = {
       reviewImageId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Reviews',
-          key: 'id'
-        },
-        onDelete: 'cascade'
+   
       },
       spotImageId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Spots',
-          key: 'id'
-        },
-        onDelete: 'cascade'
+   
       },
       createdAt: {
         allowNull: false,
