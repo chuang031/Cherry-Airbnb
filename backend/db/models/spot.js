@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false
     },
     description: {type: DataTypes.STRING,
@@ -78,11 +78,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     avgRating: {
       type: DataTypes.DECIMAL,
-      allowNull: false
+      allowNull: true
     },
     previewImage: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,

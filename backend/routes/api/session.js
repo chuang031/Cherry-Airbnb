@@ -70,10 +70,31 @@ router.post(
     }
   );
 
-  router.get('/', restoreUser, requireAuth, async (req,res)=>{
+  // router.get('/', restoreUser, requireAuth, async (req,res)=>{
   
   
-    res.json(req.user)
-  })
+  //   res.json(req.user)
+  // })
+  router.delete(
+    '/',
+    (_req, res) => {
+      res.clearCookie('token');
+      return res.json({ message: 'success' });
+    }
+  );
+  
+  router.get(
+    '/',
+    restoreUser,
+    (req, res) => {
+      const { user } = req;
+      if (user) {
+        return res.json({
+          user: user.toSafeObject()
+        });
+      } else return res.json({});
+    }
+  );
+
   
 module.exports = router;

@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       address: {
         type: Sequelize.STRING(50)
@@ -30,7 +31,7 @@ module.exports = {
         type: Sequelize.DECIMAL
       },
       name: {
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(50)
       },
       description: {
         type: Sequelize.STRING(256)
@@ -48,11 +49,11 @@ module.exports = {
       },
       avgRating: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:true
       },
       previewImage: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull:true
       }
     });
   },

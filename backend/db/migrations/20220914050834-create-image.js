@@ -17,12 +17,12 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       reviewImageId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
    
       },
       spotImageId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
    
       },
