@@ -4,29 +4,25 @@ const router = express.Router();
 const { Spot, Image, User } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const {handleValidationErrors} = require('../../utils/validation')
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 const validateSpots = [
     
     check('address')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .isAlpha()
       .withMessage("Street address is required"),
     check('city')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .isAlpha()
       .withMessage("City is required"), 
     check('state')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .isAlpha()
       .withMessage("State is required"), 
     check('country')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .isAlpha()
       .withMessage("Country is required"), 
     check('lat')
       .exists({ checkFalsy: true })
@@ -84,6 +80,8 @@ router.post("/", requireAuth, validateSpots, async (req, res) => {
   const userId = req.user.id;
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
+
+
   const newSpot = await Spot.create({
     userId,
     address,
@@ -132,7 +130,6 @@ router.put('/:spotId', requireAuth, validateSpots, async(req,res)=>{
         })
     }
 
-   
     userSpot.address = address,
     userSpot.city= city,
     userSpot.state = state,

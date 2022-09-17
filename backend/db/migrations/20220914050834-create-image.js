@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING(500)
       },
       preview: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.BOOLEAN
       },
       reviewImageId: {

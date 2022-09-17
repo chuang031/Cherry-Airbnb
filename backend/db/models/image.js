@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     preview: {
       type: DataTypes.BOOLEAN,
-      allowNull:false
+      allowNull:true
     },
     reviewImageId: {
       type: DataTypes.INTEGER,

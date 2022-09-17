@@ -27,11 +27,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     review: {
       type: DataTypes.CHAR,
-      allowNull:false
+      allowNull:true
     },
     stars: {
       type: DataTypes.INTEGER,
-      allowNull:false
+      allowNull:true 
     }
   }, {
     sequelize,
