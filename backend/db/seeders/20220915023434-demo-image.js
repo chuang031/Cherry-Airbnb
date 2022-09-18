@@ -21,18 +21,10 @@ module.exports = {
         spotImageId: 1,
         createdAt: "2021-11-19 20:39:36",
       updatedAt: "2021-11-19 20:39:36",
-      },
-      {
-        id: 2,
-        url: "image url",
-        preview: false,
-        reviewImageId: 2,
-        spotImageId: 2, 
-        createdAt: "2021-11-19 20:39:36",
-      updatedAt: "2021-11-19 20:39:36",
       }
     ])
   },
+  
 
   async down (queryInterface, Sequelize) {
     /**
