@@ -82,7 +82,8 @@ router.get("/", async (req, res) => {
     include: 
     {
         model: Image
-    }
+    },
+    
 })
 
   let spotList = []
@@ -103,7 +104,7 @@ spotList.forEach( async (spot)=>{
     }
     delete spot.Images
 
-    const avgSpotReviews = await Spot.findOne({where:{id:spot.id}},{
+    const avgSpotReviews = await Review.findOne({where:{spotId:spot.id}},{
         include: 
         {
             model: Review,
@@ -113,11 +114,10 @@ spotList.forEach( async (spot)=>{
             [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
         ],
         raw:true,
-        group: ['Spot.id']
     
     })
    
-    console.log(avgSpotReviews)
+    console.log(avgSpotReviews.avgRating)
 
  spot.avgRating = avgSpotReviews.avgRating
  
