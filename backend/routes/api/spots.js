@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 
@@ -5,6 +6,8 @@ const { Spot, Image, User, Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 const { check, validationResult } = require("express-validator");
+const spot = require("../../db/models/spot");
+const sequelize = require('sequelize')
 
 const validateSpots = [
   check("address")
@@ -57,12 +60,84 @@ const validateReviews = [
     .notEmpty()
     .isFloat({ min: 1, max: 5 })
     .withMessage("Stars must be an integer from 1 to 5"),
-  handleValidationErrors,
+  handleValidationErrors
 ];
-router.get("/", async (req, res) => {
-  const allSpots = await Spot.findAll();
 
-  res.json(allSpots);
+// console.log(aggRating)
+    // let newObj = {}
+    // for(let key in spot){
+    //     if(key !== 'Images'){
+    //         newObj[key] = spot[key]
+        
+    //     }
+       
+       
+    // }
+
+    // newArr.push(newObj)
+
+
+router.get("/", async (req, res) => {
+  const allSpots = await Spot.findAll( {
+    include: 
+    {
+        model: Image
+    }
+})
+
+  let spotList = []
+
+allSpots.forEach(spot =>{ 
+    spotList.push(spot.toJSON())
+})
+
+spotList.forEach( async (spot)=>{
+    spot.Images.forEach(image =>{
+        // console.log(image.preview)
+        if(image.previewImage === true){
+            spot.previewImage = image.url
+        }
+    })
+    if(!spot.previewImage){
+        spot.previewImage = 'no preview image found'
+    }
+    delete spot.Images
+
+    const avgSpotReviews = await Spot.findOne({where:{id:spot.id}},{
+        include: 
+        {
+            model: Review,
+            attributes: []
+        },
+        attributes:[
+            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
+        ],
+        raw:true,
+        group: ['Spot.id']
+    
+    })
+   
+    console.log(avgSpotReviews)
+
+ spot.avgRating = avgSpotReviews.avgRating
+ 
+//  console.log(spot)
+
+//  newArr.push(spot)
+
+//  if(i === spotList.length-1){
+//     res.json(newArr)
+//  }
+})
+
+
+
+// spotList.forEach(spot=>{
+//     spot.avgRating = avgSpotReviews.avgRating
+// })
+
+res.json({spotList})
+ 
 });
 
 
@@ -85,6 +160,9 @@ router.get("/:spotId", async (req, res) => {
       statusCode: 404,
     });
   }
+
+  
+
   res.json(details);
 });
 
@@ -106,6 +184,7 @@ router.post("/", requireAuth, validateSpots, async (req, res) => {
     price,
   });
 
+  
   res.json(newSpot);
 });
 
@@ -142,7 +221,7 @@ router.post("/:spotId/reviews",requireAuth,validateReviews,async (req, res) => {
 
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params;
-  const { url, preview } = req.body;
+  const { url, previewImage } = req.body;
   const spot = await Spot.findOne({ where: { id: spotId } });
   if (!spot) {
     res.status(404).json({
@@ -151,7 +230,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     });
   }
 
-  const newImage = await spot.createImage({ url, preview });
+  const newImage = await spot.createImage({ url, previewImage });
 
   res.json(newImage);
 });
@@ -170,17 +249,8 @@ router.put("/:spotId", requireAuth, validateSpots, async (req, res) => {
     });
   }
 
-  (userSpot.address = address),
-    (userSpot.city = city),
-    (userSpot.state = state),
-    (userSpot.country = country),
-    (userSpot.lat = lat),
-    (userSpot.lng = lng),
-    (userSpot.name = name),
-    (userSpot.description = description),
-    (userSpot.price = price);
 
-  await userSpot.save();
+const edit = await userSpot.update({address, city, state, country, lat, lng, name, description, price})
 
   res.json(userSpot);
 });

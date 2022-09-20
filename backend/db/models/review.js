@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:true
     },
     stars: {
-      type: DataTypes.FLOAT,
-      allowNull:true 
+      type: DataTypes.DECIMAL,
+      allowNull:true
     }
   }, {
     sequelize,

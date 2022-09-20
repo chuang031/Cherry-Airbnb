@@ -32,7 +32,7 @@ module.exports = {
       },
       stars: {
         allowNull: true,
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL,
       },
       createdAt: {
         allowNull: false,

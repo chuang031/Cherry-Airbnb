@@ -10,10 +10,11 @@ module.exports = {
       },
       url: {
         allowNull: false,
-        type: Sequelize.STRING(500)
+        type: Sequelize.STRING
       },
-      preview: {
-        allowNull: true,
+      previewImage: {
+        allowNull:false,
+      defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       reviewImageId: {

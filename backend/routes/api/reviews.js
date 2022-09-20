@@ -6,9 +6,41 @@ const { requireAuth } = require("../../utils/auth");
 const {handleValidationErrors} = require('../../utils/validation')
 const { check, validationResult } = require('express-validator');
 
+const validateReviews = [
+    check('review')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Review text is required "),
+    check('stars')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .isFloat({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors
+]
+router.put('/:reviewId',validateReviews, async (req,res)=>{
+    const {reviewId} = req.params
+    const {review, stars} = req.body
+    const currentReview = await Review.findByPk(reviewId)
 
+    if(!currentReview){
+        res.status(404).json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
 
-router.post('/:reviewId/images',requireAuth,async (req,res)=>{
+    }
+    // currentReview.review = review,
+    // currentReview.stars = stars
+
+    // await currentReview.save()
+
+    const edit = await currentReview.update({review,stars})
+
+    return res.json(edit)
+})
+
+router.post('/:reviewId/images',requireAuth,  async (req,res)=>{
    
     const {reviewId} = req.params
     const {url,preview} = req.body
@@ -32,6 +64,8 @@ router.post('/:reviewId/images',requireAuth,async (req,res)=>{
     res.json(addImage);
 
 })
+
+
 
 router.get('/current', requireAuth, async (req,res)=>{
     const {user} = req

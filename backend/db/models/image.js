@@ -22,12 +22,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     url: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.STRING,
       allowNull:false
     },
-    preview: {
+    previewImage: {
       type: DataTypes.BOOLEAN,
-      allowNull:true
+      allowNull:false,
+      defaultValue: false
     },
     reviewImageId: {
       type: DataTypes.INTEGER,

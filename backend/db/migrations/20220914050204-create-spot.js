@@ -13,47 +13,66 @@ module.exports = {
         allowNull: false
       },
       address: {
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING,
+        allowNull: false
+
       },
       city: {
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING,
+        allowNull: false
+
       },
       state: {
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING,
+        allowNull: false
+
       },
       country: {
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING,
+        allowNull: false
+
       },
       lat: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull: false
+
       },
       lng: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull: false
+
       },
       name: {
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING(50),
+        allowNull: false
+
       },
       description: {
-        type: Sequelize.STRING(256)
+        type: Sequelize.STRING,
+        allowNull: false
       },
       price: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       avgRating: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull:true
       },
       previewImage: {
-        type: Sequelize.STRING,
-        allowNull:true
+        type: Sequelize.BOOLEAN,
+      allowNull:false,
+      defaultValue: false
       }
     });
   },

@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'spotImageId'
       })
 
-      // Spot.hasMany(models.Review, {
-      //   foreignKey: 'spotId'
-      // })
-
       Spot.hasMany(models.Booking, {
         foreignKey: 'spotId'
       })
@@ -77,12 +73,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     avgRating: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.FLOAT,
       allowNull: true
     },
     previewImage: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue: false
     }
   }, {
     sequelize,
