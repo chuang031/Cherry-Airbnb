@@ -2,7 +2,7 @@
 const express = require('express')
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
-
+const jwt = require('jsonwebtoken');
 // Validating Login Request Body
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -42,6 +42,7 @@ router.post(
 
     return res.json({
       user
+      // token:req.headers.cookie
     });
   }
 );

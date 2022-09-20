@@ -2,11 +2,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { Spot, Image, User, Review } = require("../../db/models");
+const { Spot, Image, User, Review, Booking } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 const { check, validationResult } = require("express-validator");
-const spot = require("../../db/models/spot");
 const sequelize = require('sequelize')
 
 const validateSpots = [
@@ -63,19 +62,6 @@ const validateReviews = [
   handleValidationErrors
 ];
 
-// console.log(aggRating)
-    // let newObj = {}
-    // for(let key in spot){
-    //     if(key !== 'Images'){
-    //         newObj[key] = spot[key]
-        
-    //     }
-       
-       
-    // }
-
-    // newArr.push(newObj)
-
 
 router.get("/", async (req, res) => {
   const allSpots = await Spot.findAll( {
@@ -91,7 +77,7 @@ allSpots.forEach(spot =>{
     spotList.push(spot.toJSON())
 })
 
-spotList.forEach( async (spot)=>{
+spotList.forEach( spot =>{
     spot.Images.forEach(image =>{
         // console.log(image.preview)
         if(image.previewImage === true){
@@ -102,39 +88,8 @@ spotList.forEach( async (spot)=>{
         spot.previewImage = 'no preview image found'
     }
     delete spot.Images
-
-    const avgSpotReviews = await Spot.findOne({where:{id:spot.id}},{
-        include: 
-        {
-            model: Review,
-            attributes: []
-        },
-        attributes:[
-            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
-        ],
-        raw:true,
-        group: ['Spot.id']
-    
-    })
-   
-    console.log(avgSpotReviews)
-
- spot.avgRating = avgSpotReviews.avgRating
- 
-//  console.log(spot)
-
-//  newArr.push(spot)
-
-//  if(i === spotList.length-1){
-//     res.json(newArr)
-//  }
+    delete spot.avgRating
 })
-
-
-
-// spotList.forEach(spot=>{
-//     spot.avgRating = avgSpotReviews.avgRating
-// })
 
 res.json({spotList})
  
@@ -154,14 +109,25 @@ router.get("/:spotId", async (req, res) => {
     include: [{ model: Image }, { model: User }],
   });
 
-  if (!details) {
+  const avgSpotReviews = await Spot.findByPk(spotId,{
+    include: 
+    {
+        model: Review,
+        attributes: []
+    },
+    attributes:[
+        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
+    ],
+    raw:true
+})
+if (!details) {
     res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
   }
 
-  
+details.avgRating = avgSpotReviews.avgRating 
 
   res.json(details);
 });
@@ -188,6 +154,23 @@ router.post("/", requireAuth, validateSpots, async (req, res) => {
   res.json(newSpot);
 });
 
+router.post('/:spotId/bookings', requireAuth, async (req,res)=>{
+    const {spotId} = req.params
+    const {startDate, endDate} = req.body
+    const userId = req.user.id
+    const newSpot = await Spot.findByPk(spotId)
+
+    const booked = await newSpot.createBooking({userId ,startDate,endDate})
+    if(newSpot.userId === userId){
+  
+        res.status(401).json({
+        message: 'Unauthorized',
+        statusCode: 401
+        })
+     
+    }
+    res.json(booked)
+})
 // Create a Review for a Spot
 router.post("/:spotId/reviews",requireAuth,validateReviews,async (req, res) => {
 

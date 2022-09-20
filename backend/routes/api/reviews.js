@@ -43,7 +43,7 @@ router.put('/:reviewId',validateReviews, async (req,res)=>{
 router.post('/:reviewId/images',requireAuth,  async (req,res)=>{
    
     const {reviewId} = req.params
-    const {url,preview} = req.body
+    const {url,previewImage} = req.body
     const reviews = await Review.findOne({ where: { id:reviewId } });
     const maxImages = await Image.findAll({where:{reviewImageId:reviewId}})
    
@@ -60,7 +60,7 @@ router.post('/:reviewId/images',requireAuth,  async (req,res)=>{
         })
     }
 
-    const addImage = await reviews.createImage({url,preview})
+    const addImage = await reviews.createImage({url,previewImage})
     res.json(addImage);
 
 })
