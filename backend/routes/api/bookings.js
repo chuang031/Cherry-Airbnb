@@ -23,4 +23,31 @@ router.get("/current", requireAuth, async (req, res) => {
     res.json({bookings});
   });
 
+
+  router.put('/:bookingId', requireAuth, async (req,res)=>{
+    const {user} = req
+    const {startDate,endDate} = req.body
+const {bookingId} = req.params
+    const existingBooking = await Booking.findOne({where:{id:bookingId, userId:user.id},})
+    if (!existingBooking){
+      res.status(404).json({
+        message: "Booking couldn't be found",
+        statusCode: 404
+      })
+    }
+    const updateBooking = await existingBooking.update({startDate,endDate})
+
+
+    if(endDate<= startDate){
+      res.status(400).json({
+        message: "Validation error",
+        statusCode: 400,
+        errors: {
+          endDate: "endDate cannot come before startDate"
+      }
+    })
+
+    }
+    res.json(updateBooking)
+  })
   module.exports = router;

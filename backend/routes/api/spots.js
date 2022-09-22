@@ -146,9 +146,42 @@ router.post("/", requireAuth, validateSpots, async (req, res) => {
 
   res.json(newSpot);
 });
-router.get('/spotId/bookings', async(req,res)=>{
+router.get('/:spotId/bookings',requireAuth, async(req,res)=>{
+    const {spotId} = req.params
+    const {user} = req;
+    const ownerView = await Booking.findAll({
+        include:{
+            model: User,
+            attributes: ['id', 'firstName','lastName']
+        },
+        where:{spotId:spotId}
+    })
+
+    const customerView = await Booking.findAll({
+        attributes: ['spotId','startDate','endDate']
+    ,
+    where:{spotId:spotId}
+    })
+    const spot = await Spot.findOne({where:{id:spotId}})
     
+    if(!spot){
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    if(user.id !== spot.userId){
+        res.json({Bookings:customerView})
+    }
+
+    if (user.id === spot.userId){
+        res.json(ownerView)
+    }
+
 })
+
+
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const { startDate, endDate } = req.body;
