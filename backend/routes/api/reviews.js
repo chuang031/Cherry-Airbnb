@@ -82,7 +82,7 @@ router.get("/current", requireAuth, async (req, res) => {
   const review = await Review.findAll({
     include:[
         {model: User, attributes: ['id','firstName','lastName']},
-        {model:Spot, attributes:['id','userId','address','city','state','country','lat','lng','name','price','previewImage']},
+        {model:Spot, attributes:['id','userId','address','city','state','country','lat','lng','name','price']},
         {model: Image, attributes:['id','url']}
     ],
      where: { userId: user.id } 

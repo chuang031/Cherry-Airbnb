@@ -109,10 +109,36 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/current", requireAuth, async (req, res) => {
-  const user = req.user;
-  const spots = await Spot.findAll({ where: { userId: user.id } });
+  const {user} = req
+  const spots = await Spot.findAll({ 
+    include: {
+        model: Image,
+        attributes:['id','url', 'previewImage']
+      },
+    where: { userId: user.id } });
 
-  res.json(spots);
+let spotList = [];
+
+spots.forEach((spot) => {
+  spotList.push(spot.toJSON());
+});
+
+spotList.forEach((spot) => {
+  spot.Images.forEach((image) => {
+    // console.log(image.preview)
+    if (image.previewImage === true) {
+      spot.previewImage = image.url;
+    }
+  });
+
+  if (!spot.previewImage) {
+    spot.previewImage = "no preview image found";
+  }
+
+
+
+});
+  res.json({spotList});
 });
 
 router.delete("/:spotId", async (req, res) => {
@@ -132,11 +158,17 @@ router.delete("/:spotId", async (req, res) => {
     statusCode: 200,
   });
 });
+
 router.get("/:spotId", async (req, res) => {
   const { spotId } = req.params;
-  const details = await Spot.findByPk(spotId, {
+  const details = await Spot.findOne( {
     include: [{ model: Image }, { model: User }],
-  });
+    attributes:{exclude: ['previewImage']},
+    where:{id:spotId}
+
+  },
+
+  );
 
   const avgSpotReviews = await Spot.findByPk(spotId, {
     include: {
@@ -148,6 +180,8 @@ router.get("/:spotId", async (req, res) => {
     ],
     raw: true,
   });
+
+  
   if (!details) {
     res.status(404).json({
       message: "Spot couldn't be found",
@@ -301,7 +335,8 @@ router.post(
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const { url, previewImage } = req.body;
-  const spot = await Spot.findOne({ where: { id: spotId } });
+  const spot = await Spot.findOne({ where: { id: spotId }
+});
   if (!spot) {
     res.status(404).json({
       message: "Spot couldn't be found",

@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       Image.belongsTo(models.Review,{
         foreignKey: 'reviewImageId'
       })
+
+
     }
   }
   Image.init({
@@ -27,8 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     previewImage: {
       type: DataTypes.BOOLEAN,
-      allowNull:false,
-      defaultValue: true
+      allowNull:true
     },
     reviewImageId: {
       type: DataTypes.INTEGER,

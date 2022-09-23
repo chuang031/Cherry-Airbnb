@@ -77,9 +77,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     previewImage: {
-      type: DataTypes.BOOLEAN,
-      allowNull:false,
-      defaultValue: false
+      type: DataTypes.STRING,
+      allowNull:true
     }
   }, {
     sequelize,

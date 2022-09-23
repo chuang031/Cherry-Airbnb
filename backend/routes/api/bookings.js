@@ -15,10 +15,25 @@ router.get("/current", requireAuth, async (req, res) => {
         attributes: ['id','userId','address','city','state','country','lat','lng','name','price','previewImage']
       },
        where: { userId: user.id } 
-    },
-    
-      );
+    })
+   
+    const images = await Image.findAll()
 
+    bookings.forEach((book)=>{
+      images.forEach((image)=>{
+        if(image.spotImageId === book.Spot.id){
+          if(image.previewImage === true){
+            book.Spot.previewImage = image.url
+          }
+        }
+        if(!book.Spot.previewImage){
+          book.Spot.previewImage ="no preview image found"
+        }
+      })
+    })
+      
+
+    
 
     res.json({bookings});
   });

@@ -13,8 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       previewImage: {
-        allowNull:false,
-      defaultValue: true,
+        allowNull:true,
         type: Sequelize.BOOLEAN
       },
       reviewImageId: {

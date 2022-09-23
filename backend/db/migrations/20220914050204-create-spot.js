@@ -70,9 +70,8 @@ module.exports = {
         allowNull:true
       },
       previewImage: {
-        type: Sequelize.BOOLEAN,
-      allowNull:false,
-      defaultValue: false
+        type: Sequelize.STRING,
+      allowNull:true
       }
     });
   },
