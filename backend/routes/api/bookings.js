@@ -23,6 +23,25 @@ router.get("/current", requireAuth, async (req, res) => {
     res.json({bookings});
   });
 
+  router.delete('/:bookingId',requireAuth, async (req,res)=>{
+    const {user} = req
+    const {bookingId} = req.params
+      const existingBooking = await Booking.findOne({where:{id:bookingId, userId:user.id},})
+      if (!existingBooking){
+        res.status(404).json({
+          message: "Booking couldn't be found",
+          statusCode: 404
+        })
+      }
+  
+      await existingBooking.destroy()
+  
+      return res.json({
+        message: "Successfully deleted",
+        statusCode: 200
+      })
+  
+  })
 
   router.put('/:bookingId', requireAuth, async (req,res)=>{
     const {user} = req
@@ -36,7 +55,6 @@ const {bookingId} = req.params
       })
     }
     const updateBooking = await existingBooking.update({startDate,endDate})
-
 
     if(endDate<= startDate){
       res.status(400).json({

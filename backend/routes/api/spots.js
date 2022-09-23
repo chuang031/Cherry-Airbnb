@@ -62,10 +62,23 @@ const validateReviews = [
 ];
 
 router.get("/", async (req, res) => {
+  let page = parseInt(req.query.page, 10);
+  let size = parseInt(req.query.size, 20);
+
+  if (Number.isNaN(page)) {
+    page = 0;
+  }
+
+  if (Number.isNaN(size)) {
+    size = 20;
+  }
+
   const allSpots = await Spot.findAll({
     include: {
       model: Image,
     },
+    limit: size,
+    offset: size * (page - 1),
   });
 
   let spotList = [];
@@ -81,14 +94,16 @@ router.get("/", async (req, res) => {
         spot.previewImage = image.url;
       }
     });
+
     if (!spot.previewImage) {
       spot.previewImage = "no preview image found";
     }
+
     delete spot.Images;
     delete spot.avgRating;
   });
 
-  res.json({ spotList });
+  res.json({ spotList, page, size });
 });
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -98,6 +113,23 @@ router.get("/current", requireAuth, async (req, res) => {
   res.json(spots);
 });
 
+router.delete("/:spotId", async (req, res) => {
+  const { spotId } = req.params;
+  const details = await Spot.findByPk(spotId);
+  if (!details) {
+    res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  await details.destroy();
+
+  res.json({
+    message: "Successfully deleted",
+    statusCode: 200,
+  });
+});
 router.get("/:spotId", async (req, res) => {
   const { spotId } = req.params;
   const details = await Spot.findByPk(spotId, {
@@ -146,41 +178,38 @@ router.post("/", requireAuth, validateSpots, async (req, res) => {
 
   res.json(newSpot);
 });
-router.get('/:spotId/bookings',requireAuth, async(req,res)=>{
-    const {spotId} = req.params
-    const {user} = req;
-    const ownerView = await Booking.findAll({
-        include:{
-            model: User,
-            attributes: ['id', 'firstName','lastName']
-        },
-        where:{spotId:spotId}
-    })
+router.get("/:spotId/bookings", requireAuth, async (req, res) => {
+  const { spotId } = req.params;
+  const { user } = req;
+  const ownerView = await Booking.findAll({
+    include: {
+      model: User,
+      attributes: ["id", "firstName", "lastName"],
+    },
+    where: { spotId: spotId },
+  });
 
-    const customerView = await Booking.findAll({
-        attributes: ['spotId','startDate','endDate']
-    ,
-    where:{spotId:spotId}
-    })
-    const spot = await Spot.findOne({where:{id:spotId}})
-    
-    if(!spot){
-        res.status(404).json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    }
+  const customerView = await Booking.findAll({
+    attributes: ["spotId", "startDate", "endDate"],
+    where: { spotId: spotId },
+  });
+  const spot = await Spot.findOne({ where: { id: spotId } });
 
-    if(user.id !== spot.userId){
-        res.json({Bookings:customerView})
-    }
+  if (!spot) {
+    res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
 
-    if (user.id === spot.userId){
-        res.json(ownerView)
-    }
+  if (user.id !== spot.userId) {
+    res.json({ Bookings: customerView });
+  }
 
-})
-
+  if (user.id === spot.userId) {
+    res.json(ownerView);
+  }
+});
 
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const { spotId } = req.params;
@@ -208,7 +237,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   ];
   //  return console.log (dateRangeArray)
 
-  const existingBooking = await Booking.findAll({where:{spotId}});
+  const existingBooking = await Booking.findAll({ where: { spotId } });
   // return console.log(existingBooking)
 
   existingBooking.forEach((booking) => {
@@ -219,10 +248,9 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         booking.endDate.getTime() >= dateRangeArray[0]) ||
       (booking.startDate.getTime() <= dateRangeArray[1] &&
         booking.endDate.getTime() >= dateRangeArray[1]) ||
-        (booking.startDate.getTime() >= dateRangeArray[0] &&
+      (booking.startDate.getTime() >= dateRangeArray[0] &&
         booking.endDate.getTime() <= dateRangeArray[1])
     ) {
- 
       res.status(403).json({
         message: "Sorry, this spot is already booked for the specified dates",
         errors: {
