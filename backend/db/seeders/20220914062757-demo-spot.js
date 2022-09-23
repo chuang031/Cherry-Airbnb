@@ -14,7 +14,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('Spots',[
       {
-      id: 1,
+  
       userId: 1,
       address: "123 Disney Lane",
       city: "San Francisco",

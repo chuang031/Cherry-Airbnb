@@ -80,7 +80,7 @@ router.get("/", async (req, res) => {
       model: Image,
     },
     limit: size,
-    offset:(page - 1) * size,
+    offset: (size * (page -1)),
   });
 
   let spotList = [];
