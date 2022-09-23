@@ -80,7 +80,7 @@ router.get("/", async (req, res) => {
       model: Image,
     },
     limit: size,
-    offset: size * (page - 1),
+    offset:(page - 1) * size,
   });
 
   let spotList = [];
@@ -105,7 +105,7 @@ router.get("/", async (req, res) => {
     delete spot.avgRating;
   });
 
-  res.json({ spotList, page, size });
+  res.json({ spotList });
 });
 
 router.get("/current", requireAuth, async (req, res) => {
