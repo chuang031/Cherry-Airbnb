@@ -13,7 +13,7 @@ module.exports = {
     */
 
     await queryInterface.bulkInsert('Reviews',[{
-      id: 1,
+   
       userId: 1,
       spotId: 1,
       review: "This was an awesome spot!",
