@@ -14,7 +14,8 @@ module.exports = {
         references: {
           model: 'Spots', 
           key: 'id'
-        }
+        },
+        onDelete: 'cascade'
       },
       userId: {
         allowNull: false,
