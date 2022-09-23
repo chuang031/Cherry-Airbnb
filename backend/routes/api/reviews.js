@@ -79,7 +79,14 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
 router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;
 
-  const review = await Review.findAll({ where: { userId: user.id } });
+  const review = await Review.findAll({
+    include:[
+        {model: User, attributes: ['id','firstName','lastName']},
+        {model:Spot, attributes:['id','userId','address','city','state','country','lat','lng','name','price','previewImage']},
+        {model: Image, attributes:['id','url']}
+    ],
+     where: { userId: user.id } 
+  });
 
   res.json({ review });
 });

@@ -14,7 +14,7 @@ module.exports = {
       },
       previewImage: {
         allowNull:false,
-      defaultValue: false,
+      defaultValue: true,
         type: Sequelize.BOOLEAN
       },
       reviewImageId: {

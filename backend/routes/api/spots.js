@@ -345,10 +345,16 @@ router.put("/:spotId", requireAuth, validateSpots, async (req, res) => {
 
 router.get("/:spotId/reviews", async (req, res) => {
   const { spotId } = req.params;
+const spot = await Spot.findByPk(spotId)
 
-  const spotReviews = await Review.findAll({ where: { spotId } });
-  const anyReview = await Review.findOne({ where: { spotId } });
-  if (!anyReview) {
+  const spotReviews = await Review.findAll({
+    include:[
+        {model:User, attributes:['id','firstName','lastName']},
+        {model:Image, attributes:['id','url']}
+    ], where: { spotId:spot.id } 
+  });
+
+  if (!spot) {
     res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
