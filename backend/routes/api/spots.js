@@ -117,6 +117,7 @@ router.get("/current", requireAuth, async (req, res) => {
       },
     where: { userId: user.id } });
 
+    
 let spotList = [];
 
 spots.forEach((spot) => {
@@ -129,6 +130,8 @@ spotList.forEach((spot) => {
     if (image.previewImage === true) {
       spot.previewImage = image.url;
     }
+
+    delete spot.avgRating
   });
 
   if (!spot.previewImage) {
@@ -163,7 +166,7 @@ router.get("/:spotId", async (req, res) => {
   const { spotId } = req.params;
   const details = await Spot.findOne( {
     include: [{ model: Image }, { model: User }],
-    attributes:{exclude: ['reviewImageId','spotImageId']},
+    attributes:{exclude: ['reviewImageId']},
     where:{id:spotId}
 
   },
@@ -339,6 +342,8 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 
 
 }
+
+
 );
   if (!spot) {
     res.status(404).json({
