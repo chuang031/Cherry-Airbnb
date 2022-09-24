@@ -338,7 +338,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   const spot = await Spot.findOne({ where: { id: spotId }
 
 
-
+}
 );
   if (!spot) {
     res.status(404).json({
@@ -348,6 +348,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   }
 
   const newImage = await spot.createImage({ url, previewImage });
+
 
 
   res.json(newImage);
