@@ -313,21 +313,25 @@ router.post(
     const userId = req.user.id;
     const spot = await Spot.findOne({ where: { id: spotId } });
 
+           //Create a Review for a Spot - Error Check Invalid Spot Id
+           if (!spot) {
+            res.status(404).json({
+              message: "Spot couldn't be found",
+              statusCode: 404,
+            });
+          }
     //Create a Review for a Spot - Error Check - Previous Review for User/Spot Already Exists
     const existingReview = await Review.findOne({ where: { spotId } });
+
+   
     if (existingReview) {
-      res.status(403).json({
+      return res.status(403).json({
         message: "User already has a review for this spot",
         statusCode: 403,
       });
     }
-    //Create a Review for a Spot - Error Check Invalid Spot Id
-    if (!spot) {
-      res.status(404).json({
-        message: "Spot couldn't be found",
-        statusCode: 404,
-      });
-    }
+
+
 
     const newReview = await spot.createReview({ userId, review, stars });
 
@@ -391,7 +395,13 @@ router.put("/:spotId", requireAuth, validateSpots, async (req, res) => {
 router.get("/:spotId/reviews", async (req, res) => {
   const { spotId } = req.params;
 const spot = await Spot.findByPk(spotId)
-
+if (!spot) {
+    res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  
   const spotReviews = await Review.findAll({
     include:[
         {model:User, attributes:['id','firstName','lastName']},
@@ -399,12 +409,7 @@ const spot = await Spot.findByPk(spotId)
     ], where: { spotId:spot.id } 
   });
 
-  if (!spot) {
-    res.status(404).json({
-      message: "Spot couldn't be found",
-      statusCode: 404,
-    });
-  }
+
   res.json({ spotReviews });
 });
 module.exports = router;
