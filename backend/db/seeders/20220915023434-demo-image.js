@@ -18,7 +18,7 @@ module.exports = {
         url: "image url",
         previewImage: true,
         spotImageId: 1,
-        reviewImageId:1,
+
         createdAt: "2021-11-19 20:39:36",
       updatedAt: "2021-11-19 20:39:36",
       }
