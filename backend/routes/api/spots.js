@@ -163,7 +163,7 @@ router.get("/:spotId", async (req, res) => {
   const { spotId } = req.params;
   const details = await Spot.findOne( {
     include: [{ model: Image }, { model: User }],
-    attributes:{exclude: ['previewImage']},
+    attributes:{exclude: ['reviewImageId','spotImageId']},
     where:{id:spotId}
 
   },
@@ -336,7 +336,10 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const { url, previewImage } = req.body;
   const spot = await Spot.findOne({ where: { id: spotId }
-});
+
+
+
+);
   if (!spot) {
     res.status(404).json({
       message: "Spot couldn't be found",
@@ -345,6 +348,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   }
 
   const newImage = await spot.createImage({ url, previewImage });
+
 
   res.json(newImage);
 });
