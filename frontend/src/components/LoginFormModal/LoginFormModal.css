@@ -1,0 +1,12 @@
+.login_modal form label{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+form{
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    justify-content: center;
+  }

@@ -1,0 +1,36 @@
+.form{
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 2px solid red;
+  border-radius: 10px;
+  padding: 2rem;
+  justify-content: center;
+}
+
+label {
+    display: inline-block;
+
+}
+
+input, textarea{
+    display: block;
+    width: 100%
+}
+
+body{
+    font-family: sans-serif;
+}
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ 
+}
+
+.center form label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

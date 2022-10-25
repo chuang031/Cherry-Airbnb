@@ -2,8 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
-
+import logo from '../../images/logo.png'
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
@@ -15,19 +16,28 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">Log In</NavLink>
+        <LoginFormModal />
         <NavLink to="/signup">Sign Up</NavLink>
       </>
     );
   }
 
   return (
+    <header>
+    <div className='container'>
+    <NavLink exact to="/"><img className='logo' src = {logo}></img></NavLink>
+
+    <nav>
     <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+      <li> 
         {isLoaded && sessionLinks}
       </li>
     </ul>
+    </nav>
+
+    
+    </div>
+    </header>
   );
 }
 
