@@ -4,32 +4,42 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import SpotList from "./components/Spots/AllSpots";
-
+import SpotList from "./components/Spots/SpotList/SpotList";
+import SpotById from "./components/Spots/SpotsById/SpotById";
+import SpotsForms from "./components/Spots/SpotsForm/SpotsForm";
+import { getAllSpots } from "./store/spotsReducer";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getAllSpots())
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <SpotList />
+          </Route>
+
           <Route path="/signup">
             <SignupFormPage />
           </Route>
 
-          <Route exact path="/">
-          <SpotList/>
-        </Route>
-          
+         <Route exact path="/spots">
+            <SpotsForms />
+          </Route> 
+
+          <Route path="/spots/:spotId">
+            <SpotById />
+          </Route>
 
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

@@ -12,22 +12,25 @@ import * as sessionActions from "./store/session";
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== "production") {
+
+
+if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
 
   window.csrfFetch = csrfFetch;
   window.store = store;
-  window.sessionActions = sessionActions;
+  window.sessionActions = sessionActions
 }
 
 function Root() {
   return (
     <Provider store={store}>
-      <ModalProvider>
+   
         <BrowserRouter>
+        <ModalProvider>
           <App />
+          </ModalProvider>
         </BrowserRouter>
-      </ModalProvider>
     </Provider>
   );
 }

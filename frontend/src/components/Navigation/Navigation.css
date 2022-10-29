@@ -12,9 +12,10 @@
 }
 
 .container{
-
+height: 50px;
   width: 80%;
   margin: 23px auto;
+  z-index: 10;
 }
 
 nav {
@@ -27,8 +28,4 @@ nav ul {
   padding: 0;
   display: inline-block;
   
-}
-
-li {
-  color: red;
 }
