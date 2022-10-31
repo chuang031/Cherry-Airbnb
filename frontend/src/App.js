@@ -8,6 +8,7 @@ import SpotList from "./components/Spots/SpotList/SpotList";
 import SpotById from "./components/Spots/SpotsById/SpotById";
 import SpotsForms from "./components/Spots/SpotsForm/SpotsForm";
 import { getAllSpots } from "./store/spotsReducer";
+import EditSpotsForm from "./components/Spots/EditSpotsForm/EditSpotsForm";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -33,9 +34,13 @@ function App() {
             <SpotsForms />
           </Route> 
 
-          <Route path="/spots/:spotId">
+          <Route exact path="/spots/:spotId">
             <SpotById />
           </Route>
+
+          <Route exact path="/spots/:spotId/update">
+          <EditSpotsForm/>
+        </Route>
 
         </Switch>
       )}

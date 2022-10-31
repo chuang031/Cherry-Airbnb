@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addASpot } from '../../../store/spotsReducer';
-
-const SpotsForms=()=>{
-const dispatch= useDispatch()
-
-const [id, setId] = useState('')
-const [useruId, setUserId]= useState('')
-const [address, setAddress]= useState('')
+import { editASpot } from '../../../store/spotsReducer';
+import { useParams } from 'react-router-dom';
+const EditSpotsForm =()=>{
+    const dispatch= useDispatch()
+    const {spotId} = useParams()
+    const [address, setAddress]= useState('')
 const [city, setCity]= useState('')
 const [state, setState]= useState('')
 const [country, setCountry]= useState('')
@@ -17,29 +15,34 @@ const [lng,setLng]= useState('')
 const [name, setName]= useState('')
 const [description, setDescription]= useState('')
 const [price, setPrice]= useState('')
-
 const [errors, setErrors] = useState([]);
 
 const history = useHistory()
-
 
 const handleSubmit = async (e)=>{
     e.preventDefault()
     setErrors([]);
 const payload = { address,city,state,country,lat,lng,name,description,price }
-let newSpot
+   let newSpot
 try{
-     newSpot= await dispatch( addASpot(payload))
+     newSpot= await dispatch( editASpot(spotId,payload))
 
    }catch(error){
-  setErrors(error)
+  // setErrors(error)
    }
-
-if(newSpot){
-  history.push(`/spots/${newSpot.id}`);
-}
-   
-
+   if(newSpot){
+    history.push(`/spots/${newSpot.id}`);
+  }
+  setName('')
+  setAddress('')
+  setCity('')
+  setState('')
+  setCountry('')
+  setLat('')
+  setLng('')
+  setDescription('')
+  setPrice('')
+  
 }
 
 return(
@@ -133,13 +136,13 @@ return(
     />
     </label>
     
-    <button type="submit">Create new Spot</button>
-
+    <button type="submit">Update Spot</button>
     </form>
     </div>
 
     
 )
+
 }
 
-export default SpotsForms
+export default EditSpotsForm
