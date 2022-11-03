@@ -26,12 +26,15 @@ function Navigation({ isLoaded }) {
         <img className="logo" src={logo}></img>
       </NavLink>
 
+      <div className='header_right'>
         <nav>
+        <p>Become a host</p>
           <ul>
             <li>{isLoaded && sessionLinks}</li>
           </ul>
         </nav>
- 
+        </div>
+
     </div>
   );
 }

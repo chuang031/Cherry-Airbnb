@@ -12,21 +12,31 @@ console.log(allSpots)
 useEffect(()=>{
         dispatch(getAllSpots())
     },[dispatch])
-    return(
-<div>
 
-<ul>
+return(
 
-{allSpots?.map(({id, city, state , previewImage})=>
 
-(<li><Link to={`/spots/${id}`}><img src={previewImage}></img> Spot #{id}: {city},{state}</Link></li>)
+    <div className='spot_container'>
 
-    )}
 
-</ul>
+{allSpots?.map(({id, city, state , price, previewImage})=>
+
+<div className='card' >
+
+<Link to={`/spots/${id}`}>
+
+<img className='card_img' src={previewImage}></img> 
+<div className='card_info'>Spot #{id}: {city},{state}</div>
+<div className='price_info'>${price} night</div>
+</Link>
+
+
+</div>)}
+
+
 </div>
 
-    )
-}
+
+)}
 
 export default SpotList

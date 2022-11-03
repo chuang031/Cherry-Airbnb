@@ -15,6 +15,7 @@ const [lng,setLng]= useState('')
 const [name, setName]= useState('')
 const [description, setDescription]= useState('')
 const [price, setPrice]= useState('')
+const [previewImage, setPreviewImage]= useState('')
 const [errors, setErrors] = useState([]);
 
 const history = useHistory()
@@ -22,26 +23,15 @@ const history = useHistory()
 const handleSubmit = async (e)=>{
     e.preventDefault()
     setErrors([]);
-const payload = { address,city,state,country,lat,lng,name,description,price }
+const payload = { address,city,state,country,lat,lng,name,description,price,previewImage }
    let newSpot
 try{
      newSpot= await dispatch( editASpot(spotId,payload))
-
-   }catch(error){
-  // setErrors(error)
+     history.push(`/spots/${newSpot.id}`);
+   }catch(err){
+    const data = await err.json()
+    setErrors([...Object.values(data.errors)])
    }
-   if(newSpot){
-    history.push(`/spots/${newSpot.id}`);
-  }
-  setName('')
-  setAddress('')
-  setCity('')
-  setState('')
-  setCountry('')
-  setLat('')
-  setLng('')
-  setDescription('')
-  setPrice('')
   
 }
 
@@ -60,6 +50,7 @@ return(
     <input 
     type='text'
     value={name}
+    required
     onChange={e=>setName(e.target.value)}
     />
     </label>
@@ -69,6 +60,7 @@ return(
     <input 
     type='text'
     value={address}
+    required
     onChange={e=>setAddress(e.target.value)}
     />
     </label>
@@ -78,6 +70,7 @@ return(
     <input 
     type='text'
     value={city}
+    required
     onChange={e=>setCity(e.target.value)}
     />
     </label>
@@ -87,6 +80,7 @@ return(
     <input 
     type='text'
     value={state}
+    required
     onChange={e=>setState(e.target.value)}
     />
     </label>
@@ -96,6 +90,7 @@ return(
     <input 
     type='text'
     value={country}
+    required
     onChange={e=>setCountry(e.target.value)}
     />
     </label>
@@ -105,6 +100,7 @@ return(
     <input 
     type='text'
     value={lat}
+    required
     onChange={e=>setLat(e.target.value)}
     />
     </label>
@@ -114,6 +110,7 @@ return(
     <input 
     type='text'
     value={lng}
+    required
     onChange={e=>setLng(e.target.value)}
     />
     </label>
@@ -123,6 +120,7 @@ return(
     <input 
     type='text'
     value={description}
+    required
     onChange={e=>setDescription(e.target.value)}
     />
     </label>
@@ -132,10 +130,21 @@ return(
     <input 
     type='text'
     value={price}
+    required
     onChange={e=>setPrice(e.target.value)}
     />
     </label>
     
+    <label>
+    Images
+    <input 
+    type='text'
+    value={previewImage}
+    required
+    onChange={e=>setPreviewImage(e.target.value)}
+    />
+    </label>
+
     <button type="submit">Update Spot</button>
     </form>
     </div>

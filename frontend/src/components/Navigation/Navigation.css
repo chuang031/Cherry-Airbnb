@@ -1,24 +1,33 @@
 *{
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+
 }
 
 
 .logo{
   float: left;
   object-fit: contain;
-  width: 13%;
+margin-left: 20px;
+  height: 100px;
+width:30%
+
 }
 
 .container{
-height: 50px;
-  width: 80%;
-  margin: 23px auto;
-  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top:0
+
 }
 
-nav {
+.header_right{
+  display: flex;
+  align-items: center;
+}
+/* nav {
   float: right;
 }
 
@@ -28,4 +37,4 @@ nav ul {
   padding: 0;
   display: inline-block;
   
-}
+} */

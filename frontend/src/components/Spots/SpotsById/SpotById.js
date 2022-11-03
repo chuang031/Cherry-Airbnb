@@ -1,21 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { deleteASpot, getAllSpots, getSingleSpot } from '../../../store/spotsReducer';
 import { useHistory, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { getSpotReviews } from '../../../store/reviewsReducer';
+import SpotsReviews from '../SpotsReviews/SpotsReviews';
+import { CreateReviews } from '../../Reviews/CreateReviews/CreateReviews';
+
+import './SpotById.css'
 const SpotById = () => {
 const {spotId} = useParams()
+const [reviews,setReviews]= useState([])
     const allSpots = useSelector((state)=> state.spots)
 
     const specificSpot = allSpots[spotId]
    
+console.log(specificSpot, 'ss')
+
 const history = useHistory()
     const dispatch= useDispatch()
 
-    useEffect(()=>{
-        dispatch(getSingleSpot(spotId))
-    },[spotId])
+    // useEffect(()=>{
+    //     dispatch(getSpotReviews(spotId))
+    // },[spotId,dispatch])
 
+   
     if(!specificSpot) return null
     
 //  let image =specificSpot.Images.find(image=> image.spotImageId = specificSpot.id)
@@ -33,19 +42,16 @@ const history = useHistory()
          
         })
      
-    
-
-
-
   };
 
     return(
-        <div>
-        {specificSpot.Images?.map(({url})=>
-        (<img src={url}></img>)
-      )}
+        <div className='details_container'>
+        <div className='spot_name'>{specificSpot.name}</div>
+        <div className='city_country'>{specificSpot.city},{specificSpot.country}</div>
 
+        <img src={specificSpot.previewImage}></img>
       
+
 <Link to={`/spots/${specificSpot.id}/images`}> 
 <button type="button">
 Show All Photos
@@ -69,15 +75,36 @@ Show All Photos
         <br/>
         Longitude:{specificSpot.lng}
         <br/>
-
+        Rating: {specificSpot.avgRating}
+        <br/>
+        
         <Link to={`/spots/${specificSpot.id}/update`}> 
 <button type="button">
 Update Form
 </button>
+</Link>
+
 <button type="button" onClick={deleteSpot}>Delete Spot</button>
 
-</Link>
+
+
+
+<div>
+<h1>Reviews</h1>
+
+<SpotsReviews spot={specificSpot} reviews={reviews} setReviews={setReviews} /> 
+
+
+
+<CreateReviews spot={specificSpot} reviews={reviews} setReviews={setReviews}/>
+
+
+
+
+</div>
         </div>
+
+        
 
     )
 }
