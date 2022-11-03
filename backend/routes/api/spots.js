@@ -27,11 +27,13 @@ const validateSpots = [
   check("lat")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Latitude is not valid"),
+    .isNumeric()
+    .withMessage("Latitude is not valid, must be numeric"),
   check("lng")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Longitude is not valid"),
+    .isNumeric()
+    .withMessage("Longitude is not valid, must be numeric"),
   check("name")
     .exists({ checkFalsy: true })
     .isLength({ max: 50 })
@@ -43,7 +45,8 @@ const validateSpots = [
   check("price")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Price per day is required"),
+    .isNumeric()
+    .withMessage("Price must be numeric"),
 
   handleValidationErrors,
 ];
@@ -199,7 +202,7 @@ router.get("/:spotId", async (req, res) => {
 
 router.post("/", requireAuth, validateSpots, async (req, res) => {
   const userId = req.user.id;
-  const { address, city, state, country, lat, lng, name, description, price } =
+  const { address, city, state, country, lat, lng, name, description, price, previewImage } =
     req.body;
 
   const newSpot = await Spot.create({
@@ -213,6 +216,8 @@ router.post("/", requireAuth, validateSpots, async (req, res) => {
     name,
     description,
     price,
+    previewImage,
+    avgRating:0
   });
 
   res.json(newSpot);
@@ -321,9 +326,9 @@ router.post(
             });
           }
     //Create a Review for a Spot - Error Check - Previous Review for User/Spot Already Exists
-    const existingReview = await Review.findOne({ where: { spotId } });
-
-   
+    const existingReview = await Review.findOne({ where: { userId, spotId } });
+console.log(existingReview, 'exist')
+ 
     if (existingReview) {
       return res.status(403).json({
         message: "User already has a review for this spot",
@@ -365,7 +370,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 
 router.put("/:spotId", requireAuth, validateSpots, async (req, res) => {
   const { spotId } = req.params;
-  const { address, city, state, country, lat, lng, name, description, price } =
+  const { address, city, state, country, lat, lng, name, description, price,previewImage } =
     req.body;
 
   const userSpot = await Spot.findOne({ where: { id: spotId } });
@@ -387,6 +392,7 @@ router.put("/:spotId", requireAuth, validateSpots, async (req, res) => {
     name,
     description,
     price,
+    previewImage
   });
 
   res.json(userSpot);

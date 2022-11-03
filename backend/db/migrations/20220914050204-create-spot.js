@@ -71,7 +71,7 @@ module.exports = {
       },
       previewImage: {
         type: Sequelize.STRING,
-      allowNull:true
+      
       }
     });
   },
