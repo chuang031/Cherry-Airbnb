@@ -15,7 +15,7 @@ module.exports = {
     await queryInterface.bulkInsert('Images',[
       {
   
-        url: "image url",
+        url: "https://a0.muscache.com/im/pictures/81439bfb-0cd3-49bd-82d6-6bffbc123fe0.jpg?im_w=720",
         previewImage: true,
         spotImageId: 1,
 
