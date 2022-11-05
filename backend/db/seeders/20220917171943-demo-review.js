@@ -14,7 +14,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('Reviews',[{
    
-      userId: 1,
+      userId: 2,
       spotId: 1,
       review: "This was an awesome spot!",
       stars: 5,

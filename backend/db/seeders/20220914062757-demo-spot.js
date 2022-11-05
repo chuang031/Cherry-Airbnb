@@ -25,7 +25,7 @@ module.exports = {
       name: "App Academy",
       description: "Place where web developers are created",
       price: 123,
-  
+      previewImage: true
     }
 
   
