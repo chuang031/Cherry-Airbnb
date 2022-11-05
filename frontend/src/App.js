@@ -11,6 +11,8 @@ import { getAllSpots } from "./store/spotsReducer";
 import EditSpotsForm from "./components/Spots/EditSpotsForm/EditSpotsForm";
 import { CreateReviews } from "./components/Reviews/CreateReviews/CreateReviews";
 import { getSpotReviews } from "./store/reviewsReducer";
+import UserSpots from "./components/Spots/UserSpots/UserSpots";
+import UserSpotDetails from "./components/Spots/UserSpotDetails/UserSpotDetails";
 function App() {
   const dispatch = useDispatch();
   const {spotId} = useParams()
@@ -19,7 +21,7 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllSpots())
     dispatch(getSpotReviews(spotId))
-  }, [dispatch,[spotId]]);
+  }, [dispatch,spotId]);
 
   return (
     <div>
@@ -38,6 +40,11 @@ function App() {
             <SpotsForms />
           </Route> 
 
+          <Route exact path="/spots/myspots">
+          <UserSpots/>
+        </Route>
+
+
           <Route exact path="/spots/:spotId">
             <SpotById />
           </Route>
@@ -46,6 +53,7 @@ function App() {
           <EditSpotsForm/>
         </Route>
 
+      
 
         </Switch>
       )}

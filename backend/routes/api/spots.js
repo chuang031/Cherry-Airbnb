@@ -104,10 +104,24 @@ router.get("/", async (req, res) => {
       spot.previewImage = "no preview image found";
     }
 
+
     delete spot.Images;
-    delete spot.avgRating;
+    // delete spot.avgRating;
   });
 
+//   spotList.forEach(async (spot)=>{
+//   const avgSpotReviews = await Spot.findByPk(spot.id, {
+//     include: {
+//       model: Review,
+//       attributes: [],
+//     },
+//     attributes: [
+//       [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+//     ],
+//     raw: true,
+//   });
+// spot.avgRating = avgSpotReviews.avgRating
+// })
   res.json({ spotList });
 });
 
@@ -134,16 +148,17 @@ spotList.forEach((spot) => {
       spot.previewImage = image.url;
     }
 
-    delete spot.avgRating
+    // delete spot.avgRating
   });
 
   if (!spot.previewImage) {
     spot.previewImage = "no preview image found";
   }
-
-
-
 });
+
+
+
+
   res.json({spotList});
 });
 

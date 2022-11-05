@@ -7,18 +7,18 @@ const ADD_REVIEW = "/spots/ADD_REVIEW";
 const REMOVE_REVIEW='/spots/REMOVE_REVIEW'
 
 const loadReviews = (reviews, spotId) => {
-    return {
-      type: GET_ALL_REVIEWS,
-      reviews,
-      spotId
-    };
+  return {
+    type: GET_ALL_REVIEWS,
+    reviews,
+    spotId
   };
+};
   
-  const addingReview = (reviews, spotId) => {
+  const addingReview = (review) => {
     return {
       type: ADD_REVIEW,
-      reviews,
-      spotId
+      review,
+     
     };
   };
   
@@ -31,7 +31,7 @@ const loadReviews = (reviews, spotId) => {
 
   export const getSpotReviews= (spotId) => async (dispatch) => {
 
-    console.log(spotId, 'hi')
+  
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
   
     if (response.ok) {
@@ -44,19 +44,19 @@ const loadReviews = (reviews, spotId) => {
     }
   };
 
-  export const addAReview = (reviews, spotId)=> async(dispatch)=>{
+  export const addAReview = (review, spotId)=> async(dispatch)=>{
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`,{
         method: 'POST',
         headers: {
             'Content-Type':'application/json'
         },
-        body: JSON.stringify(reviews)
+        body: JSON.stringify(review)
       })
     
       if (response.ok) {
         const data = await response.json();
     
-        dispatch(addingReview(data, spotId));
+        dispatch(addingReview(data));
        return data
       }
   }
@@ -80,16 +80,21 @@ const loadReviews = (reviews, spotId) => {
         case GET_ALL_REVIEWS:
             action.reviews.spotReviews.forEach((review) => {
                 copy[review.id] = review;
+
+                // console.log(action.reviews.spotReviews, 'get review')
               });
      
               return copy;
 
         case ADD_REVIEW:
-            copy[action.reviews.spotId] = action.reviews
+            copy[action.review.id] = action.review
+
+            // console.log(action.reviews, 'add review')
             return copy
 
         case REMOVE_REVIEW:
             delete copy[action.reviewId]
+            return copy
 
             default:
                 return state;
