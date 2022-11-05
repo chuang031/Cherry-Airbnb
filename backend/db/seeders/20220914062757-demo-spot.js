@@ -25,7 +25,7 @@ module.exports = {
       name: "App Academy",
       description: "Place where web developers are created",
       price: 123,
-      previewImage: true
+      previewImage: "https://a0.muscache.com/im/pictures/81439bfb-0cd3-49bd-82d6-6bffbc123fe0.jpg?im_w=720"
     }
 
   
