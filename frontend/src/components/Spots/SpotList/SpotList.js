@@ -44,7 +44,7 @@ return(
 <Link to={`/spots/${id}`}>
 
 <img className='card_img' src={previewImage}></img> 
-<div className='card_info'>Spot #{id}: {city},{state}   <FontAwesomeIcon icon={faStar}/>Rating:{avgRating}</div>
+<div className='card_info'>Spot #{id}: {city},{state} </div>
 <div className='price_info'>${price} night</div>
 </Link>
 
