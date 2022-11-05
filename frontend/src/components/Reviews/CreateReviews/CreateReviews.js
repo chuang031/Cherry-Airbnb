@@ -45,7 +45,7 @@ return(
 
     <div>
 
-    {currentUser?.id !== specificSpot.userId &&(
+    {currentUser?.id !== specificSpot.userId && (currentUser?.id) &&(
         <form onSubmit={handleSubmit}>
     
         <ul>

@@ -28,7 +28,6 @@ function Navigation({ isLoaded }) {
 
       <div className='header_right'>
         <nav>
-        <p>Become a host</p>
           <ul>
             <li>{isLoaded && sessionLinks}</li>
           </ul>
