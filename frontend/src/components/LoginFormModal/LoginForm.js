@@ -21,8 +21,20 @@ function LoginForm() {
 
   return (
     <div className="login_modal">
+
+     <div className="login-sign">
+     <span> Log in </span>
+     
+     </div>
+
+
+    <div className="login_welcome">
+    
+    <h1>Welcome to AirBnB (Cherry Edition)! </h1>
+    </div>
+
     <form onSubmit={handleSubmit}>
-      <ul>
+      <ul className="errors">
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
@@ -45,7 +57,7 @@ function LoginForm() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button type="submit" className="submit">Log In</button>
     </form>
 
     </div>

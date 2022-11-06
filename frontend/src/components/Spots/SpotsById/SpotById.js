@@ -12,6 +12,8 @@ import SpotsReviews from "../SpotsReviews/SpotsReviews";
 import { CreateReviews } from "../../Reviews/CreateReviews/CreateReviews";
 import { useEffect } from "react";
 import { deleteAReview } from "../../../store/reviewsReducer";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar} from '@fortawesome/free-solid-svg-icons'
 import "./SpotById.css";
 const SpotById = () => {
   const { spotId } = useParams();
@@ -47,56 +49,85 @@ const SpotById = () => {
 
     
   };
+
+ 
   return (
   
-    <div className="details_container">
+    <div className="spotid_container">
       <div className="spot_name">{specificSpot.name}</div>
       <div className="city_country">
         {specificSpot.city},{specificSpot.country}
       </div>
+      <div className="stars"><FontAwesomeIcon icon={faStar} />{specificSpot.avgRating?.toFixed(2)}</div>
+
+      <div className="center_page">
+
+      <div className="spot_image">
       <img src={specificSpot.previewImage}></img>
-      <Link to={`/spots/${spotId}/images`}>
-        <button type="button">Show All Photos</button>
-      </Link>
-      <br />
-      ID: {specificSpot.id}
-      <br />
-      User Id: {specificSpot.userId}
-      <br />
+      </div>
+
+      <div className="details_container">
+      <li>
       Name: {specificSpot.name}
-      <br />
+      </li>
+
+      <li>
+      ID: {specificSpot.id}
+      </li>
+
+      <li>
+      User Id: {specificSpot.userId}
+      </li>
+   
+       <li>
       Address: {specificSpot.address}
-      <br />
-      {specificSpot.city},{specificSpot.country}
-      <br />
+      </li>
+      <li>
+      {specificSpot.city}, {specificSpot.country}
+      </li>
+      <li>
       Description: {specificSpot.description}
-      <br />
+      </li>
+      <li>
       Price:{specificSpot.price}
-      <br />
+      </li>
+      <li>
       Latitude: {specificSpot.lat}
-      <br />
+      </li>
+      <li>
       Longitude:{specificSpot.lng}
-      <br />
-      Rating: {specificSpot.avgRating}
-      <br />
+      </li>
+      <li>
+      Rating: {specificSpot.avgRating?.toFixed(2)}
+      </li>
+    
+
 
       {currentUser?.id === specificSpot.userId &&(
 
         <Link to={`/spots/${specificSpot.id}/update`}>
-        <button type="button">Update Form</button>
+        <button className='update_button' type="button">Update Form</button>
       </Link>
       )}
 
       {currentUser?.id === specificSpot.userId &&(
-        <button type="button" onClick={deleteSpot}>
+        <button className='delete_button' type="button" onClick={deleteSpot}>
         Delete Spot
       </button>
       )}
-  
-    
-      <h1>Reviews</h1>
+      </div>
+      </div>
+
+
+
+      
+      <div className='review_container'>
+      <h1 className="review_title">Reviews</h1>
+      <div className="review_info">
       <SpotsReviews spot={specificSpot} />
       <CreateReviews spot={specificSpot} />
+      </div>
+      </div>
     </div>
   );
 };

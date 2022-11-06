@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { addAReview } from '../../../store/reviewsReducer';
 import { getAllSpots, getSingleSpot } from '../../../store/spotsReducer';
+import './CreateReviews.css'
 
 export const CreateReviews= ({spot})=>{
 const[stars,setStars]= useState('0')
@@ -50,7 +51,7 @@ return(
     
         <ul>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <li className='errorsreviews' key={idx}>{error}</li>
         ))}
       </ul>
     
@@ -74,7 +75,7 @@ return(
         />
         </label>
 
-            <button type="submit">Submit new Review</button>
+            <button className='submit_review' type="submit">Submit new Review</button>
         
        
         

@@ -1,0 +1,38 @@
+.submity{
+    background-color: white;
+   
+    border: 1px solid tomato;
+    border-radius: 10px;
+    color: tomato;
+    padding: 5px;
+}
+
+.submity:hover{
+    background-color: tomato;
+    color: black;
+    cursor: pointer;
+}
+.update{
+    display: flex;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 30px;
+    color: tomato;
+    padding: 30px;
+}
+
+.errors{
+    color: red;
+    font-style: italic;
+
+}
+
+.error_list{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+

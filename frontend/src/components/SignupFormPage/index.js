@@ -33,8 +33,12 @@ const [lastName, setLastName] = useState('')
 
   return (
   <div className="center">
+  <div className="signup_span">
+  <span className="sign_today"> Sign up Today! </span>
+  
+  </div>
     <form className='form' onSubmit={handleSubmit}>
-      <ul>
+      <ul className="errors">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
@@ -85,7 +89,7 @@ const [lastName, setLastName] = useState('')
           required
         />
       </label>
-      <label>
+      <label className="confirm">
         Confirm Password
         <input
           type="password"
@@ -95,7 +99,8 @@ const [lastName, setLastName] = useState('')
         />
       </label>
 
-      <button type="submit">Sign Up</button>
+    
+      <button className='submit_b' type="submit">Sign Up</button>
     </form>
     </div>
   );

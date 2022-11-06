@@ -36,7 +36,7 @@ return(
     <div className='spot_container'>
 
 
-{allSpots?.map(({id, city, state , price, previewImage, avgRating})=>
+{allSpots?.map(({id, city, state , price, previewImage})=>
 
 
 <li key={id}  className='card' >

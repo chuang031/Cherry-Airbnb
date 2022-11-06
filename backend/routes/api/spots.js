@@ -209,7 +209,7 @@ router.get("/:spotId", async (req, res) => {
       statusCode: 404,
     });
   }
-
+if (avgSpotReviews.avgRating === null) return 0
   details.avgRating = avgSpotReviews.avgRating;
 
   res.json(details);
@@ -285,6 +285,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
 
   if (findSpot.userId === userId) {
     res.status(401).json({
+      errors:['Unauthorized, this is your spot'],
       message: "Unauthorized, this is your spot",
       statusCode: 401,
     });
@@ -346,6 +347,7 @@ console.log(existingReview, 'exist')
  
     if (existingReview) {
       return res.status(403).json({
+        errors: ['User already has a review for this spot'],
         message: "User already has a review for this spot",
         statusCode: 403,
       });

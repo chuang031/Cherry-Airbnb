@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getAllSpots } from '../../../store/spotsReducer';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { deleteAReview, getSpotReviews } from '../../../store/reviewsReducer';
-
+import './SpotsReviews.css'
 const SpotsReviews = ({spot})=>{
 
     const allSpotReviews = useSelector((state)=> Object.values(state.reviews))
@@ -40,10 +40,15 @@ console.log(id, 'delete')
 
     {specificReviews?.map(({review,stars, spotId, userId, id})=>(
         
-    <li key={review}>id:{id}, {review}, Stars:{stars}, spot:{spotId}, user: {userId} 
+    <li className='review_list' key={review}>
+    <li>Review Number: {id} </li>
+    <li>Review: {review} </li>
+    <li>Stars: {stars}</li>
+    <li> Spot Number:{spotId}</li>
+    <li> User Number: {userId} </li>
 
     {currentUser?.id === userId &&(
-        <button type="button" onClick={ (e)=> deleteReview(e, id)}>Delete Review</button>)}
+        <button className='delete_review' type="button" onClick={ (e)=> deleteReview(e, id)}>Delete Review</button>)}
 
 </li>
 

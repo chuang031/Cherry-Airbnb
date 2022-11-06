@@ -3,26 +3,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editASpot } from '../../../store/spotsReducer';
 import { useParams } from 'react-router-dom';
+import './EditSpotsForm.css'
 const EditSpotsForm =()=>{
     const dispatch= useDispatch()
     const {spotId} = useParams()
-    const [address, setAddress]= useState('')
-const [city, setCity]= useState('')
-const [state, setState]= useState('')
-const [country, setCountry]= useState('')
-const [lat,setLat]= useState('')
-const [lng,setLng]= useState('')
-const [name, setName]= useState('')
-const [description, setDescription]= useState('')
-const [price, setPrice]= useState('')
-const [previewImage, setPreviewImage]= useState('')
+   
+    const allSpots = useSelector((state) => state.spots);
+    const specificSpot = allSpots[spotId];
+    const [address, setAddress]= useState(specificSpot.address)
+const [city, setCity]= useState(specificSpot.city)
+const [state, setState]= useState(specificSpot.state)
+const [country, setCountry]= useState(specificSpot.country)
+const [lat,setLat]= useState(specificSpot.lat)
+const [lng,setLng]= useState(specificSpot.lng)
+const [name, setName]= useState(specificSpot.name)
+const [description, setDescription]= useState(specificSpot.state)
+const [price, setPrice]= useState(specificSpot.price)
+const [previewImage, setPreviewImage]= useState(specificSpot.previewImage)
 const [errors, setErrors] = useState([]);
 
 const history = useHistory()
 
+
+
 const handleSubmit = async (e)=>{
     e.preventDefault()
     setErrors([]);
+   
 const payload = { address,city,state,country,lat,lng,name,description,price,previewImage }
    let newSpot
 try{
@@ -32,18 +39,19 @@ try{
     const data = await err.json()
     setErrors([...Object.values(data.errors)])
    }
+
   
 }
 
 return(
-    <div>
-    <form onSubmit={handleSubmit}>
-   
-    <ul>
+    <div className='update_container'>
+    <form className='update_spots' onSubmit={handleSubmit}>
+   <div className='update'>Update your Airbnb!</div>
+    <ul className='error_list'>
     {errors.map((error, idx) => (
-      <li key={idx}>{error}</li>
+      <li className='errors' key={idx}>{error}</li>
     ))}
-  </ul>
+  </ul >
 
     <label>
     Name
@@ -145,7 +153,7 @@ return(
     />
     </label>
 
-    <button type="submit">Update Spot</button>
+    <button className='submity' type="submit">Update Spot</button>
     </form>
     </div>
 

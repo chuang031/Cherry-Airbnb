@@ -1,0 +1,27 @@
+.review_list{
+
+        width: 700px;
+        display: flex;
+        flex-direction: column;
+        font-size: 120px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        padding: 10px;
+        border: 1px solid lightgray;
+        border-radius: 20px;
+
+}
+
+.delete_review{
+    background-color: white;
+   
+    border: 1px solid tomato;
+    border-radius: 10px;
+    color: tomato;
+    padding: 5px;
+}
+
+.delete_review:hover{
+    background-color: tomato;
+    color: black;
+    cursor: pointer;
+  }

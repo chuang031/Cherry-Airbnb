@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
-
+import './Navigation.css'
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+const history= useHistory()
   
   useEffect(() => {
     if (!showMenu) return;
@@ -27,28 +24,27 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+history.push('/')
   };
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
+  
+  
         <ul className="profile-dropdown">
           <li>{user.username}</li>
           <li>{user.email}</li>
           <li>
-          <Link to='/spots'>Create a Spot!</Link>
+          <Link to='/spots' className="create_spot">Create a Spot!</Link>
           </li>
           <li>
-          <Link to='/spots/myspots'>My Spot!</Link>
+          <Link to='/spots/myspots' className="user_spots">My Spots!</Link>
           </li>
           <li>
-            <button onClick={logout}>Log Out</button>
+            <button className='logout_button' onClick={logout}>Log Out</button>
           </li>
         </ul>
-      )}
+      
     </>
   );
 }
