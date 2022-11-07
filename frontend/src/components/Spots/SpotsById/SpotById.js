@@ -58,7 +58,7 @@ const [avgRating,setAvgRating]=('0')
       <div className="city_country">
         {specificSpot.city},{specificSpot.country}
       </div>
-      <div className="stars"><FontAwesomeIcon icon={faStar} />{specificSpot.avgRating?.toFixed(2)}</div>
+      <div className="stars"><FontAwesomeIcon icon={faStar} />{specificSpot.avgRating}</div>
 
       <div className="center_page">
 
@@ -101,7 +101,7 @@ const [avgRating,setAvgRating]=('0')
       {specificSpot.avgRating === null?
         <div className='rate'>Rating: 0</div>
        :  <li>
-       Rating: {specificSpot.avgRating.toFixed(2)}
+       Rating: {specificSpot.avgRating}
        </li>
       }
      
