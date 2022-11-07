@@ -46,7 +46,7 @@ return(
 
 <img className='card_img' src={previewImage}></img>
 <div className='name'>{name}</div> 
-<div className='card_info'>Spot #{id}: {city},{state} </div>
+<div className='card_info'>Spot #{id}: {city}, {state} </div>
 <div className='price_info'>${price} night</div>
 </Link>
 

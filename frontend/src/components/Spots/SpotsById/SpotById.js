@@ -49,16 +49,16 @@ const [avgRating,setAvgRating]=('0')
 
     
   };
-
+ let avg = specificSpot.avgRating?.toFixed(2)
  
   return (
   
     <div className="spotid_container">
       <div className="spot_name">{specificSpot.name}</div>
       <div className="city_country">
-        {specificSpot.city},{specificSpot.country}
+        {specificSpot.city}, {specificSpot.country}
       </div>
-      <div className="stars"><FontAwesomeIcon icon={faStar} />{specificSpot.avgRating}</div>
+      <div className="stars"><FontAwesomeIcon icon={faStar} />{avg}</div>
 
       <div className="center_page">
 
@@ -67,6 +67,9 @@ const [avgRating,setAvgRating]=('0')
       </div>
 
       <div className="details_container">
+
+      <h1 className="info"> Info Card</h1>
+
       <li>
       Name: {specificSpot.name}
       </li>
@@ -89,7 +92,7 @@ const [avgRating,setAvgRating]=('0')
       Description: {specificSpot.description}
       </li>
       <li>
-      Price:{specificSpot.price}
+      Price: ${specificSpot.price}
       </li>
       <li>
       Latitude: {specificSpot.lat}
@@ -101,7 +104,7 @@ const [avgRating,setAvgRating]=('0')
       {specificSpot.avgRating === null?
         <div className='rate'>Rating: 0</div>
        :  <li>
-       Rating: {specificSpot.avgRating}
+       Rating: {avg}
        </li>
       }
      

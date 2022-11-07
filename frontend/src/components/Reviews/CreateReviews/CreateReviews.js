@@ -50,7 +50,7 @@ return(
 
     {currentUser?.id !== specificSpot.userId && (currentUser?.id) &&(
         <form onSubmit={handleSubmit}>
-    
+    <h1 className='reviewinfo'> Write a Review!</h1>
         <ul>
         {errors.map((error, idx) => (
           <li className='errors' key={idx}>{error}</li>
@@ -77,7 +77,7 @@ return(
         />
         </label>
 
-            <button type="submit">Submit new Review</button>
+            <button  type="submit">Submit Review</button>
         
        
         

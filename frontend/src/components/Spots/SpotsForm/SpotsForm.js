@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { restoreCSRF } from '../../../store/csrf';
 import { addASpot } from '../../../store/spotsReducer';
-
+import './SpotsForm.css'
 const SpotsForms=()=>{
 const dispatch= useDispatch()
 
@@ -47,10 +47,10 @@ try{
 return(
     <div>
     <form onSubmit={handleSubmit}>
-   
+    <h1 className='host' > Start Hosting Today!</h1>
     <ul>
     {errors.map((error, idx) => (
-      <li key={idx}>{error}</li>
+      <li className='errors' key={idx}>{error}</li>
     ))}
   </ul>
 
