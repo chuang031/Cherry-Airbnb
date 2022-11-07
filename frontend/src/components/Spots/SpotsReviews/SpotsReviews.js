@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getAllSpots } from '../../../store/spotsReducer';
+import { getAllSpots, getSingleSpot } from '../../../store/spotsReducer';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { deleteAReview, getSpotReviews } from '../../../store/reviewsReducer';
 import './SpotsReviews.css'
@@ -28,7 +28,7 @@ console.log(specificReviews, 'reviews')
     const deleteReview = async (e, id)=>{
         e.preventDefault()
 console.log(id, 'delete')
-
+dispatch(getSingleSpot(spot.id))
         dispatch(deleteAReview(id))
         
     }
