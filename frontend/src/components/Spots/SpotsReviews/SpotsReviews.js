@@ -46,7 +46,7 @@ dispatch(getSingleSpot(spot.id))
     {specificReviews?.map(({review,stars, spotId, userId, id})=>(
         
     <span className='review-list' key={review}>
-    <div className='userid-rev'> User: {currentUser.firstName} </div> 
+    <div className='userid-rev'> User ID: {userId} </div> 
    
    <div className='review-rev'> Review: {review}</div> 
    <div className='star-rev'>Stars:{stars}</div> 
