@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -10,9 +10,9 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-     */
+    */
 
-    await queryInterface.bulkInsert("Spots", [
+    await queryInterface.bulkInsert('Spots',[
       {
         userId: 1,
         address: "344 Fremont St.",
@@ -69,17 +69,19 @@ module.exports = {
         previewImage:
           "https://a0.muscache.com/im/pictures/56467892-0d23-4ab1-8302-9c3d0d5e52cd.jpg?im_w=1200",
       }
-    ]);
+  
+  ])
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    const Op = Sequelize.Op;
-    await queryInterface.bulkDelete("Spots", {}, {});
-  },
+     const Op = Sequelize.Op;
+     await queryInterface.bulkDelete('Spots', {}
+     , {});
+  }
 };

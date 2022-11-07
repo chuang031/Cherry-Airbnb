@@ -43,7 +43,7 @@ form{
     border-radius: 10px;
   }
 
-  .login_button{
+  .login-button{
     background-color: white;
    padding-right: 3px;
     padding: 6px;
@@ -54,12 +54,8 @@ form{
       font-size: 15px;
   }
 
-  .login_button:focus{
-    background-color: tomato;
-    color: black;
-  }
 
-  .login_button:hover{
+  .login-button:hover{
     background-color: tomato;
     color: black;
     cursor: pointer;
@@ -97,3 +93,4 @@ form{
   .error_text{
     width: 300px;
   }
+

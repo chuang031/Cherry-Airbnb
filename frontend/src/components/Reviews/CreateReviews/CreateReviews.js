@@ -4,7 +4,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import { addAReview } from '../../../store/reviewsReducer';
 import { getAllSpots, getSingleSpot } from '../../../store/spotsReducer';
 import './CreateReviews.css'
-
 export const CreateReviews= ({spot})=>{
 const[stars,setStars]= useState('0')
 const [review, setReview]=useState('')
@@ -34,11 +33,14 @@ dispatch(getSingleSpot(spot.id))
 
         setErrors([ ...Object.values(data.errors)])
     }
+
+    setReview('')
+    setStars('0')
 }
 
-useEffect(()=>{
-    dispatch(getAllSpots())
-},[dispatch])
+// useEffect(()=>{
+//     dispatch(getAllSpots())
+// },[dispatch])
 
 if (!specificSpot) return null;
 
@@ -51,7 +53,7 @@ return(
     
         <ul>
         {errors.map((error, idx) => (
-          <li className='errorsreviews' key={idx}>{error}</li>
+          <li className='errors' key={idx}>{error}</li>
         ))}
       </ul>
     
@@ -75,7 +77,7 @@ return(
         />
         </label>
 
-            <button className='submit_review' type="submit">Submit new Review</button>
+            <button type="submit">Submit new Review</button>
         
        
         

@@ -1,7 +1,7 @@
 .form{
-  max-width: 700px;
+  max-width: 500px;
   margin: 2rem auto;
-
+  border-radius: 10px;
   padding: 2rem;
   justify-content: center;
 }
@@ -33,57 +33,8 @@ body{
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.errors{
-    color: red;
-    font-style: italic;
-}
 
-.submit_b{
-    background-color: white;
-   padding: 10px;
-    border: 1px solid tomato;
-    border-radius: 10px;
-    color: tomato;
-    width: 100px;
-    margin-right: 5px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 15px;
-
-}
-
-.submit_b:focus{
-    background-color: tomato;
-    color: black;
-  }
-
-  .submit_b:hover{
-    background-color: tomato;
-    color: black;
-    cursor: pointer;
-  }
-
-label{
-    padding: 10px;
-    width: 400px;
-    font-size: 15px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
-}
-
-input{
-    border: 1px solid ;
-    border-radius: 20px;
-    height: 30px;
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.signup_span{
+.signup{
     display: flex;
     justify-content: center;
-
-}
-
-.sign_today{
-    font-size: 40px;
-    color: tomato;
 }

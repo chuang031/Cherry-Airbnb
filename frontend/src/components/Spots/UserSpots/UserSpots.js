@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { deleteASpot } from '../../../store/spotsReducer';
 
-
 const UserSpots = () =>{
     const history = useHistory()
     const dispatch= useDispatch()
@@ -14,9 +13,9 @@ const allSpots = useSelector((state)=> Object.values(state.spots))
 const userSpots = allSpots.filter((spot)=> spot.userId === currentUser.id)
 console.log(userSpots, 'helppp')
 
-// useEffect(()=>{
-//         dispatch(getAllSpots())
-//     },[dispatch])
+useEffect(()=>{
+        dispatch(getAllSpots())
+    },[dispatch])
     console.log(userSpots, 'lets see')
     const deleteSpot =  (e) => {
         e.preventDefault();
@@ -46,7 +45,12 @@ return(
 <div className='card_info'>Spot #{id}: {city},{state}</div>
 <div className='price_info'>${price} night</div>
 
+<Link to={`/spots/${id}/update`}> 
+<button type="button">
+Update Form
+</button>
 
+</Link>
 
 
 </li>)}

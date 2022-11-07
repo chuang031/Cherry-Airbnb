@@ -26,7 +26,7 @@ const SpotById = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-
+const [avgRating,setAvgRating]=('0')
   useEffect(() => {
     dispatch(getSpotReviews(spotId));
     dispatch(getSingleSpot(spotId));
@@ -98,9 +98,12 @@ const SpotById = () => {
       Longitude:{specificSpot.lng}
       </li>
 
-      <li>
-      Rating: {specificSpot.avgRating}
-      </li>
+      {specificSpot.avgRating?
+        <li>
+        Rating: {specificSpot.avgRating}
+        </li>: <div className='rate'>Rating: 0</div>
+      }
+     
     
 
 

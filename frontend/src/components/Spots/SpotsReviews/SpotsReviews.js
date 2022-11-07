@@ -19,14 +19,15 @@ const specificReviews = allSpotReviews.filter((review)=> review.spotId === spot.
 console.log(specificReviews, 'reviews')
 
     useEffect(()=>{
-    //     // setReviews(specificReviews)
-    //     // if(spot !== undefined){
+        // setReviews(specificReviews)
+        // if(spot !== undefined){
         dispatch(getSpotReviews(spot.id))
-    //     // .then(res=>setReviews(res.spotReviews))
+        // .then(res=>setReviews(res.spotReviews))
     },[spot.id, dispatch])
 
     const deleteReview = async (e, id)=>{
         e.preventDefault()
+console.log(id, 'delete')
 
         dispatch(deleteAReview(id))
         
@@ -35,29 +36,30 @@ console.log(specificReviews, 'reviews')
 
  
     return(
-<div>
+        <div className='review-container'>
+
 
     {specificReviews?.map(({review,stars, spotId, userId, id})=>(
         
-    <div className='review_list' >
-    <div >Review Number: {id} </div>
-    <div className='review_text'>Review: {review} </div>
-    <div>Stars: {stars}</div>
-    <div> Spot Number:{spotId}</div>
-    <div> User Number: {userId} </div>
+    <span className='review-list' key={review}>
+   <div className='id-rev'>ID Number:{id}</div>
+   <div className='review-rev'> Review: {review}</div> 
+   <div className='star-rev'>Stars:{stars}</div> 
+   <div className='spotid-rev'> Spot Number:{spotId}</div> 
+   <div className='userid-rev'> User ID: {userId} </div> 
 
     {currentUser?.id === userId &&(
-        <button className='delete_review' type="button" onClick={ (e)=> deleteReview(e, id)}>Delete Review</button>)}
+        <button className='delete-review' type="button" onClick={ (e)=> deleteReview(e, id)}>Delete Review</button>)}
 
-</div>
+</span>
 
 
 ))}
 
+
 </div>
-
     )
-
+ 
 }
 
 export default SpotsReviews

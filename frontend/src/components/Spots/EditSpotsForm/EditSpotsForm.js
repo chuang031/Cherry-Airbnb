@@ -7,18 +7,18 @@ import './EditSpotsForm.css'
 const EditSpotsForm =()=>{
     const dispatch= useDispatch()
     const {spotId} = useParams()
-   
     const allSpots = useSelector((state) => state.spots);
     const specificSpot = allSpots[spotId];
-    const [address, setAddress]= useState(specificSpot.address)
 
+
+const [address, setAddress]= useState(specificSpot.address)
 const [city, setCity]= useState(specificSpot.city)
 const [state, setState]= useState(specificSpot.state)
 const [country, setCountry]= useState(specificSpot.country)
 const [lat,setLat]= useState(specificSpot.lat)
 const [lng,setLng]= useState(specificSpot.lng)
 const [name, setName]= useState(specificSpot.name)
-const [description, setDescription]= useState(specificSpot.state)
+const [description, setDescription]= useState(specificSpot.description)
 const [price, setPrice]= useState(specificSpot.price)
 const [previewImage, setPreviewImage]= useState(specificSpot.previewImage)
 const [errors, setErrors] = useState([]);
@@ -28,28 +28,27 @@ const history = useHistory()
 const handleSubmit = async (e)=>{
     e.preventDefault()
     setErrors([]);
-   
 const payload = { address,city,state,country,lat,lng,name,description,price,previewImage }
    let newSpot
 try{
-     newSpot= await dispatch(editASpot(spotId,payload))
-     history.push(`/spots/${spotId}`);
+     newSpot= await dispatch( editASpot(spotId,payload))
+     history.push(`/spots/${newSpot.id}`);
    }catch(err){
     const data = await err.json()
     setErrors([...Object.values(data.errors)])
    }
-
   
 }
 
 return(
-    <div className='update_container'>
-    <form className='update_spots' onSubmit={handleSubmit}>
-   <div className='update'>Update your Airbnb!</div>
-    <ul className='error_list'>
+    <div>
+    <form className='edit-form' onSubmit={handleSubmit}>
+   <h1 className='update'>Update your spot!</h1>
+    <ul>
     {errors.map((error, idx) => (
-      <li className='errors' key={idx}>{error}</li>
+      <li className='edit-errors' key={idx}>{error}</li>
     ))}
+    
   </ul >
 
     <label>

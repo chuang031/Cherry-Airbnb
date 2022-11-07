@@ -105,7 +105,7 @@ width:30%
 }
 
 
-li{
+.dropdown-items{
   width: 200px;
   text-decoration: none;
   padding-right: 4px;
@@ -147,10 +147,8 @@ padding: 6px;
   font-size: 15px;
 }
 
-.logout_button:focus{
-  background-color: tomato;
-  color: black;
-}
+
+
 .logout_button:hover{
   background-color: tomato;
   color: black;
@@ -162,7 +160,7 @@ padding: 6px;
   color: black;
 }
 .signup_link:hover { text-decoration: none; color:tomato; }
-.log_button:hover{ text-decoration: none; color:tomato; }
+
 .create_spot:visited{color: black;}
 .user_spots:visited{color: black;}
 .create_spot:hover{ text-decoration: none; color:tomato; }

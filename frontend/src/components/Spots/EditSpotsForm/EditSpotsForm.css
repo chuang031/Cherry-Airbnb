@@ -12,27 +12,30 @@
     color: black;
     cursor: pointer;
 }
-.update{
+.edit-form{
     display: flex;
-    justify-content: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 30px;
-    color: tomato;
+    flex-direction: column;
+   
+  
     padding: 30px;
 }
 
-.errors{
+.edit-errors{
     color: red;
     font-style: italic;
-
-}
-
-.error_list{
-
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 
 
+
+
+
+
+.update{
+   width: 700px;
+padding: 50px;
+}

@@ -1,17 +1,13 @@
-.review_list{
-
-        width: 700px;
-        display: flex;
-        flex-direction: column;
-        font-size: 120px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        padding: 10px;
-        border: 1px solid lightgray;
-        border-radius: 20px;
+.review-container{
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
 
-.delete_review{
+.delete-review{
     background-color: white;
    
     border: 1px solid tomato;
@@ -20,12 +16,38 @@
     padding: 5px;
 }
 
-.delete_review:hover{
+.delete-review:hover{
     background-color: tomato;
     color: black;
     cursor: pointer;
   }
 
-.review_text{
-    width: 700px;
-}
+.id-rev{
+    font-size: 15px;
+    padding: 3px;
+  }
+  .review-rev{
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .star-rev{
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .spotid-rev{
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .userid-rev{
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .review-list{
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    padding: 10px;
+  }

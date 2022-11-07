@@ -1,4 +1,7 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
+}
 .spot_name{
     font-size: 30px;
     font-weight: bold;
@@ -45,8 +48,7 @@ transition: transform 100ms ease-in;
 cursor: pointer;
 border-radius: 20px;
 display: flex;
-justify-content: center;
-    align-items: center;
+
 
     flex-direction: column;
 
@@ -90,7 +92,7 @@ padding: 50px;
 
 .update_button{
     background-color: white;
-   
+   width: 260px;
     border: 1px solid tomato;
     border-radius: 10px;
     color: tomato;
@@ -122,4 +124,8 @@ padding: 50px;
   li{
     padding: 5px;
     font-size: 16px;
+  }
+
+  .rate{
+    padding: 5px;
   }

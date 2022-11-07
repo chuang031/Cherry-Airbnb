@@ -37,9 +37,7 @@ history.push('/')
           <li>
           <Link to='/spots' className="create_spot">Create a Spot!</Link>
           </li>
-          <li>
-          <Link to='/spots/myspots' className="user_spots">My Spots!</Link>
-          </li>
+      
           <li>
             <button className='logout_button' onClick={logout}>Log Out</button>
           </li>
