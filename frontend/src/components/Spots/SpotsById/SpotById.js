@@ -99,7 +99,7 @@ const SpotById = () => {
       </li>
 
       <li>
-      Rating: {specificSpot.avgRating?.toFixed(2)}
+      Rating: {specificSpot.avgRating}
       </li>
     
 

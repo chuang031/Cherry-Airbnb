@@ -11,7 +11,7 @@ import { useRef } from "react";
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
-let menuRef = useRef()
+
   const [open, setOpen] = useState(false)
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -20,9 +20,9 @@ let menuRef = useRef()
   useEffect(()=>{
     let handleSubmit = (e)=>{
     
-      if(!menuRef.current.contains(e.target)){
+    
         setOpen(false)
-        }
+        
       
     }
     document.addEventListener('mousedown',handleSubmit)})
@@ -52,7 +52,7 @@ let menuRef = useRef()
         <FontAwesomeIcon icon={faUser} className='user'/></div>
         </button>
     
-        <div className={`dropdown-menu ${open ? 'active' :'inactive'} `} ref={menuRef} >
+        <div className={`dropdown-menu ${open ? 'active' :'inactive'} `}  >
           <ul className= 'drop-menu'>
             <li className='dropdown-items'>
             {isLoaded }
