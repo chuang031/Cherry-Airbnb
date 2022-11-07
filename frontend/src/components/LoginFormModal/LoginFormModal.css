@@ -72,6 +72,7 @@ form{
     flex-direction: column;
     flex-wrap: wrap;
 
+
   }
 
   .submit{
@@ -91,4 +92,8 @@ form{
     background-color: tomato;
     color: black;
     cursor: pointer;
+  }
+
+  .error_text{
+    width: 300px;
   }

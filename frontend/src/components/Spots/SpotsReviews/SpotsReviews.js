@@ -18,16 +18,15 @@ const SpotsReviews = ({spot})=>{
 const specificReviews = allSpotReviews.filter((review)=> review.spotId === spot.id)
 console.log(specificReviews, 'reviews')
 
-    useEffect(()=>{
-        // setReviews(specificReviews)
-        // if(spot !== undefined){
-        dispatch(getSpotReviews(spot.id))
-        // .then(res=>setReviews(res.spotReviews))
-    },[spot.id, dispatch])
+    // useEffect(()=>{
+    //     // setReviews(specificReviews)
+    //     // if(spot !== undefined){
+    //     dispatch(getSpotReviews(spot.id))
+    //     // .then(res=>setReviews(res.spotReviews))
+    // },[spot.id, dispatch])
 
     const deleteReview = async (e, id)=>{
         e.preventDefault()
-console.log(id, 'delete')
 
         dispatch(deleteAReview(id))
         
@@ -41,8 +40,8 @@ console.log(id, 'delete')
     {specificReviews?.map(({review,stars, spotId, userId, id})=>(
         
     <li className='review_list' key={review}>
-    <li>Review Number: {id} </li>
-    <li>Review: {review} </li>
+    <li >Review Number: {id} </li>
+    <li className='review_text'>Review: {review} </li>
     <li>Stars: {stars}</li>
     <li> Spot Number:{spotId}</li>
     <li> User Number: {userId} </li>

@@ -25,3 +25,7 @@
     color: black;
     cursor: pointer;
   }
+
+.review_text{
+    width: 700px;
+}

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faStar } from '@fortawesome/free-solid-svg-icons'
 import './SpotList.css'
+import Footer from '../../Footer/Footer';
 const SpotList = () =>{
 const dispatch = useDispatch()
 
@@ -31,8 +32,8 @@ useEffect(()=>{
 
 
 return(
-
-
+<div className='page_container'>
+<div className='content_wrap'>
     <div className='spot_container'>
 
 
@@ -53,7 +54,9 @@ return(
 
 
 </div>
-
+</div>
+<Footer/>
+</div>
 
 )}
 

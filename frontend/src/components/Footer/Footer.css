@@ -1,0 +1,14 @@
+.about{
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17px;
+    padding-bottom: 30px;
+   color: black;
+}
+
+.about:visited{
+    text-decoration: none; 
+    color: black;
+}
+
+.about:hover { text-decoration: none; color:tomato; }

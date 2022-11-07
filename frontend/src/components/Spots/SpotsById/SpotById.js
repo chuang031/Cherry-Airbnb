@@ -97,6 +97,7 @@ const SpotById = () => {
       <li>
       Longitude:{specificSpot.lng}
       </li>
+      
       <li>
       Rating: {specificSpot.avgRating?.toFixed(2)}
       </li>
@@ -123,6 +124,7 @@ const SpotById = () => {
       
       <div className='review_container'>
       <h1 className="review_title">Reviews</h1>
+
       <div className="review_info">
       <SpotsReviews spot={specificSpot} />
       <CreateReviews spot={specificSpot} />

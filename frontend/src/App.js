@@ -30,7 +30,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <SpotList />
-            
           </Route>
 
           <Route path="/signup">

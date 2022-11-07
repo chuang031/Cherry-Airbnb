@@ -36,9 +36,9 @@ dispatch(getSingleSpot(spot.id))
     }
 }
 
-// useEffect(()=>{
-//     dispatch(getAllSpots())
-// },[dispatch])
+useEffect(()=>{
+    dispatch(getAllSpots())
+},[dispatch])
 
 if (!specificSpot) return null;
 
