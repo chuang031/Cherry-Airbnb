@@ -58,7 +58,7 @@ const SpotById = () => {
       <div className="city_country">
         {specificSpot.city},{specificSpot.country}
       </div>
-      <div className="stars"><FontAwesomeIcon icon={faStar} />{specificSpot.avgRating?.toFixed(2)}</div>
+      <div className="stars"><FontAwesomeIcon icon={faStar} />{specificSpot.avgRating}</div>
 
       <div className="center_page">
 
@@ -97,7 +97,7 @@ const SpotById = () => {
       <li>
       Longitude:{specificSpot.lng}
       </li>
-      
+
       <li>
       Rating: {specificSpot.avgRating?.toFixed(2)}
       </li>
