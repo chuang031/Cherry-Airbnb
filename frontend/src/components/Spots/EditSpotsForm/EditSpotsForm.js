@@ -11,6 +11,7 @@ const EditSpotsForm =()=>{
     const allSpots = useSelector((state) => state.spots);
     const specificSpot = allSpots[spotId];
     const [address, setAddress]= useState(specificSpot.address)
+
 const [city, setCity]= useState(specificSpot.city)
 const [state, setState]= useState(specificSpot.state)
 const [country, setCountry]= useState(specificSpot.country)
@@ -24,8 +25,6 @@ const [errors, setErrors] = useState([]);
 
 const history = useHistory()
 
-
-
 const handleSubmit = async (e)=>{
     e.preventDefault()
     setErrors([]);
@@ -33,8 +32,8 @@ const handleSubmit = async (e)=>{
 const payload = { address,city,state,country,lat,lng,name,description,price,previewImage }
    let newSpot
 try{
-     newSpot= await dispatch( editASpot(spotId,payload))
-     history.push(`/spots/${newSpot.id}`);
+     newSpot= await dispatch(editASpot(spotId,payload))
+     history.push(`/spots/${spotId}`);
    }catch(err){
     const data = await err.json()
     setErrors([...Object.values(data.errors)])

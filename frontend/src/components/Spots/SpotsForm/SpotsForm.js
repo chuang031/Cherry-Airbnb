@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { restoreCSRF } from '../../../store/csrf';
 import { addASpot } from '../../../store/spotsReducer';
-
+import './SpotsForm.css'
 const SpotsForms=()=>{
 const dispatch= useDispatch()
 
@@ -50,7 +50,7 @@ return(
    
     <ul>
     {errors.map((error, idx) => (
-      <li key={idx}>{error}</li>
+      <li className ='error-form' key={idx}>{error}</li>
     ))}
   </ul>
 
@@ -155,7 +155,7 @@ return(
     />
     </label>
     
-    <button type="submit">Create new Spot</button>
+    <button className='form_button' type="submit">Create new Spot</button>
 
     </form>
     </div>

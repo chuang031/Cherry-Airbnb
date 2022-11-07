@@ -68,7 +68,7 @@ module.exports = {
         price: 300,
         previewImage:
           "https://a0.muscache.com/im/pictures/56467892-0d23-4ab1-8302-9c3d0d5e52cd.jpg?im_w=1200",
-      },
+      }
     ]);
   },
 

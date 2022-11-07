@@ -19,10 +19,7 @@ function Navigation({ isLoaded }) {
   
   useEffect(()=>{
     let handleSubmit = (e)=>{
-    
-    
         setOpen(false)
-        
       
     }
     document.addEventListener('mousedown',handleSubmit)})

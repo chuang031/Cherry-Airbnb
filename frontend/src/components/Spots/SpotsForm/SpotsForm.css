@@ -12,3 +12,9 @@
     color: black;
     cursor: pointer;
 }
+
+.error-form{
+    color: red;
+    font-style: italic;
+    width: 700px;
+}
