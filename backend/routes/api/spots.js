@@ -346,6 +346,7 @@ console.log(existingReview, 'exist')
  
     if (existingReview) {
       return res.status(403).json({
+        errors:['User already has a review for this spot'],
         message: "User already has a review for this spot",
         statusCode: 403,
       });
