@@ -10,7 +10,11 @@ const SpotsReviews = ({spot})=>{
     const currentUser = useSelector((state)=>state.session.user)
     const allSpots = useSelector((state)=> state.spots)
     const specificSpot = allSpots[spot.id]
-    console.log(currentUser)
+
+    // const allUsers = useSelector((state)=>Object.values(state.user))
+
+    // console.log(allUsers, 'user')
+ 
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -42,11 +46,13 @@ dispatch(getSingleSpot(spot.id))
     {specificReviews?.map(({review,stars, spotId, userId, id})=>(
         
     <span className='review-list' key={review}>
-   <div className='id-rev'>ID Number:{id}</div>
+    <div className='userid-rev'> User: {currentUser.firstName} </div> 
+   
    <div className='review-rev'> Review: {review}</div> 
    <div className='star-rev'>Stars:{stars}</div> 
    <div className='spotid-rev'> Spot Number:{spotId}</div> 
-   <div className='userid-rev'> User ID: {userId} </div> 
+   <div className='id-rev'>ID Number:{id}</div>
+
 
     {currentUser?.id === userId &&(
         <button className='delete-review' type="button" onClick={ (e)=> deleteReview(e, id)}>Delete Review</button>)}
