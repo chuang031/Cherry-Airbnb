@@ -21,8 +21,8 @@ box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
 transition: transform 100ms ease-in;
 cursor: pointer;
 border-radius: 20px;
-width: 30%;
-
+width: 20%;
+height: 500px;
 
 
 }
@@ -49,6 +49,18 @@ margin-left: 9px;
     color: black;
     text-decoration: none;
  
+}
+
+
+.name{
+    border-radius: 10px;
+    border:1;
+    font-size: 15px;
+   font-weight: lighter;
+    margin-top: 8px;
+margin-left: 9px;
+    color: black;
+    text-decoration: none;
 }
 
 .price_info{
@@ -80,4 +92,12 @@ justify-content: center;
     .card{
         width: 50%;
     }
+  }
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .content-wrap {
+    flex: 1;
   }

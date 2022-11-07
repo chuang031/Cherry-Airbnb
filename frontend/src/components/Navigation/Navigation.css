@@ -28,8 +28,8 @@ width:30%
   display: flex;
   align-items: center;
   margin-right: 200px;
-  padding: 5px 5px 5px 12px;
-
+  padding: 3px 3px 3px 10px;
+color: black;
 
 }
 .bar{
@@ -100,7 +100,7 @@ width:30%
   align-content: flex-start;
   margin-right: 15px;
   padding-left: 20px;
- 
+
   /* background-color: white; */
 }
 
@@ -165,3 +165,8 @@ padding: 6px;
 .user_spots:visited{color: black;}
 .create_spot:hover{ text-decoration: none; color:tomato; }
 .user_spots:hover{ text-decoration: none; color:tomato; }
+
+.about{
+  display: inline;
+  justify-content: center;
+}

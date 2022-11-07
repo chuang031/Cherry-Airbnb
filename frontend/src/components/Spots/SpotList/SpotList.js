@@ -37,24 +37,34 @@ return(
     <div className='spot_container'>
 
 
-{allSpots?.map(({id, city, state , price, previewImage, avgRating})=>
+{allSpots?.map(({id, city, state , price, previewImage,  name})=>
 
 
 <li key={id}  className='card' >
 
 <Link to={`/spots/${id}`}>
 
-<img className='card_img' src={previewImage}></img> 
+<img className='card_img' src={previewImage}></img>
+<div className='name'>{name}</div> 
 <div className='card_info'>Spot #{id}: {city},{state} </div>
 <div className='price_info'>${price} night</div>
 </Link>
 
 
-</li>)}
+</li> ) }
 
 
+<div className="page-container">
+      <div className="content-wrap">
+       
+      </div>
+      <Footer />
+    </div>
 
 </div>
+
+
+
 
 
 )}

@@ -41,7 +41,11 @@ function Navigation({ isLoaded }) {
       <NavLink exact to="/">
         <img className="logo" src={logo}></img>
       </NavLink>
-
+      <div className="main_footer">
+       
+    
+      
+      </div>
         <nav>
         <button className='log_button' onClick={()=>{setOpen(!open)}} >
         <div className='header_right'> <FontAwesomeIcon icon={faBars} className='bar'/>  
@@ -57,7 +61,12 @@ function Navigation({ isLoaded }) {
           </ul>
           </div>
         </nav>
+
+ 
+
         </div>
+
+        
 
 
   );
