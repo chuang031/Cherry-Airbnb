@@ -170,3 +170,8 @@ padding: 6px;
   display: inline;
   justify-content: center;
 }
+
+.demo-button{
+  margin-left: 40px;
+  margin-top: 5px;
+}
