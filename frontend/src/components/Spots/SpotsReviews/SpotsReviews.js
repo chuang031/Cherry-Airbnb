@@ -31,10 +31,11 @@ console.log(specificReviews, 'reviews')
 
     const deleteReview = async (e, id)=>{
         e.preventDefault()
-console.log(id, 'delete')
-dispatch(getSingleSpot(spot.id))
         dispatch(deleteAReview(id))
-        
+        dispatch(getSingleSpot(spot.id))
+
+        history.push(`/spots/${spot.id}`)
+      
     }
 
 
